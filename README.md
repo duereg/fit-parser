@@ -3,7 +3,6 @@
 [![Dependency status](https://david-dm.org/duereg/swim-parser.svg)](https://david-dm.org/duereg/swim-parser)
 [![devDependency Status](https://david-dm.org/duereg/swim-parser/dev-status.svg)](https://david-dm.org/duereg/swim-parser#info=devDependencies)
 [![Build Status](https://secure.travis-ci.org/duereg/swim-parser.svg?branch=master)](https://travis-ci.org/duereg/swim-parser)
-[![NPM](https://nodei.co/npm/swim-parser.svg)](https://npmjs.org/package/swim-parser)
 
 ## Installation
 
