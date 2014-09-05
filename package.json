@@ -2,9 +2,8 @@
   "name": "swim-parser",
   "version": "0.0.0",
   "description": "Parse a swim set into a set of workout objects",
-  "main": "index.js",
   "scripts": {
-    "test": "jasmine-node"
+    "test": "jasmine-node spec"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,8 @@
   "homepage": "https://github.com/duereg/swim-parser",
   "dependencies": {
     "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
   }
 }
