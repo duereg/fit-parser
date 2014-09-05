@@ -201,8 +201,12 @@ describe('When testing the parser', function () {
         expect(warmUp.name).toBe("Warm-up");
       });
 
+      it('contains valid intervals', function() {
+        expect(warmUp.intervals).not.toBe(null);
+      });
+
       it('contains two intervals', function() {
-        expect(warmUp.intervals).toBe(2);
+        expect(warmUp.intervals.length).toBe(2);
       });
 
       it('has a distance of 500', function () {
@@ -225,12 +229,16 @@ describe('When testing the parser', function () {
         expect(mainSet.name).toBe("Workout");
       });
 
+      it('contains valid intervals', function() {
+        expect(mainSet.intervals).not.toBe(null);
+      });
+
       it('contains seven intervals', function() {
-        expect(mainSet.intervals).toBe(7);
+        expect(mainSet.intervals.length).toBe(7);
       });
 
       it('has a distance of 1400', function () {
-        expect(mainSet.totalDistance()).toBe(500);
+        expect(mainSet.totalDistance()).toBe(1400);
       });
     });
   });
