@@ -46,7 +46,7 @@ interval = "100 Swim  @   1:30"
 
 intervalSet = "4x100  Swim @ 1:30"
 
-describe "parser.coffee", ->
+describe "parser", ->
 
   it "given null to parse, returns null", ->
     expect(parse(null)).to.eq null
