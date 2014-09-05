@@ -1,6 +1,6 @@
 {expect} = require "./spec-helper"
 
-tokens = require("../lib/tokens")
+tokens = require("../src/tokens")
 
 describe "Working with the token determiner Library", ->
   describe "Testing isSet", ->

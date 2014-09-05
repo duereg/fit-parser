@@ -1,5 +1,5 @@
 {expect} = require "./spec-helper"
-parse = require("../lib/parser")
+parse = require("../src/parser")
 
 fullExample = """
 Warm-up
@@ -46,7 +46,7 @@ interval = "100 Swim  @   1:30"
 
 intervalSet = "4x100  Swim @ 1:30"
 
-describe "When testing the parser", ->
+describe "parser.coffee", ->
 
   it "given null to parse, returns null", ->
     expect(parse(null)).to.eq null

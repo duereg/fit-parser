@@ -1,5 +1,5 @@
 {expect} = require "./spec-helper"
-integer = require("../lib/int")
+integer = require("../src/int")
 
 describe "Working with the Integer Library", ->
   describe "Testing tryParse", ->
