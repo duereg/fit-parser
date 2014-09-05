@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "chai": "^1.9.1",
-    "coffee-errors": "^0.8.5",
+    "coffee-errors": "^0.8.6",
     "coffee-script": "^1.7.1",
     "gulp": "^3.8.6",
     "gulp-coffee": "^2.1.1",
-    "gulp-istanbul": "^0.2.1",
-    "gulp-mocha": "^0.5.1",
-    "gulp-util": "^2.2.20",
+    "gulp-istanbul": "^0.2.2",
+    "gulp-mocha": "^1.0.0",
+    "gulp-util": "^3.0.1",
     "mocha": "^1.18.2",
     "sinon": "^1.9.1",
     "sinon-chai": "^2.5.0"
