@@ -1,5 +1,5 @@
 {expect} = require "./spec-helper"
-parse = require("../src/parser")
+parse = require("../lib/parser")
 
 fullExample = """
 Warm-up

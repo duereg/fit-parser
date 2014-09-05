@@ -1,5 +1,5 @@
 {expect} = require "./spec-helper"
-set = require("../src/set")
+set = require("../lib/set")
 
 describe "workout-set", ->
   describe "Creating a new set", ->
