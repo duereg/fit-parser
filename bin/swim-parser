@@ -15,7 +15,6 @@ if process.argv.length < 3
 else
 
   stuff = process.argv.slice(2)
-  # console.log stuff.join ' '
   console.log JSON.stringify parser stuff.join ' '
 
 
