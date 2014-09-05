@@ -1,30 +1,43 @@
 {
   "name": "swim-parser",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Parse a swim set into a set of workout objects",
-  "scripts": {
-    "test": "jasmine-node spec"
+  "keywords": [],
+  "homepage": "https://github.com/duereg/swim-parser",
+  "bugs": "https://github.com/duereg/swim-parser/issues",
+  "author": {
+    "name": "Matt",
+    "email": "",
+    "url": "https://github.com/duereg"
   },
+  "main": "./lib/swim-parser.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/duereg/swim-parser.git"
   },
-  "keywords": [
-    "swim",
-    "parser",
-    "workout",
-    "fitness"
-  ],
-  "author": "Matt Blair",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/duereg/swim-parser/issues"
+  "scripts": {
+    "test": "gulp test",
+    "pretest": "gulp"
   },
-  "homepage": "https://github.com/duereg/swim-parser",
   "dependencies": {
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "jasmine-node": "^1.14.5"
-  }
+    "chai": "^1.9.1",
+    "coffee-errors": "^0.8.5",
+    "coffee-script": "^1.7.1",
+    "gulp": "^3.8.6",
+    "gulp-coffee": "^2.1.1",
+    "gulp-istanbul": "^0.2.1",
+    "gulp-mocha": "^0.5.1",
+    "gulp-util": "^2.2.20",
+    "mocha": "^1.18.2",
+    "sinon": "^1.9.1",
+    "sinon-chai": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=0.10.0",
+    "npm": ">=1.2.10"
+  },
+  "license": "MIT"
 }
