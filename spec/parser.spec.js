@@ -1,4 +1,4 @@
-var parse = require('../lib/app/parser.js');
+var parse = require('../src/parser.js');
 
 describe('When testing the parser', function () {
 
@@ -83,17 +83,14 @@ describe('When testing the parser', function () {
     });
 
     it('returns workout', function () {
-      var workout = parse(interval);
       expect(workout).not.toBe(null);
     });
 
     it('returns workout with set', function () {
-      var workout = parse(interval);
       expect(workout.sets.length).toBe(1);
     });
 
     it('returns workout with set and valid interval', function () {
-      var workout = parse(interval);
       var generatedInterval = workout.current().current();
 
       expect(generatedInterval).not.toBe(null);
@@ -103,65 +100,70 @@ describe('When testing the parser', function () {
   });
 
   describe('given intervalSet (4x100 Swim @ 1:30) to parse', function () {
+    var workout = null;
+
+    beforeEach(function() {
+      workout = parse(intervalSet);
+    });
+
     it('returns workout', function () {
-      var workout = parse(intervalSet);
       expect(workout).not.toBe(null);
     });
 
     it('returns workout with set', function () {
-      var workout = parse(intervalSet);
       expect(workout.sets.length).toBe(1);
     });
 
-    it('returns workout with set and 4 intervals', function () {
-      var workout = parse(intervalSet);
-      var generatedSet = workout.current();
+    describe('when looking at the current set', function() {
+      var generatedSet = null;
 
-      expect(generatedSet).not.toBe(null);
-      expect(generatedSet.intervals).not.toBe(null);
-      expect(generatedSet.intervals.length).toBe(4);
-    });
+      beforeEach(function(){
+        generatedSet = workout.current();
+      });
 
-    it('returns workout with set that has a total distance of 400', function () {
-      var workout = parse(intervalSet);
-      var generatedSet = workout.current();
+      it('creates a valid set', function() {
+        expect(generatedSet).not.toBe(null);
+      });
 
-      expect(generatedSet).not.toBe(null);
-      expect(generatedSet.intervals).not.toBe(null);
-      expect(generatedSet.totalDistance()).toBe(400);
-    });
+      it('creates valid intervals', function() {
+        expect(generatedSet.intervals).not.toBe(null);
+      });
 
-    it('returns workout with set and swim intervals', function () {
-      var workout = parse(intervalSet);
-      var generatedSet = workout.current();
+      it('returns workout with set and 4 intervals', function () {
+        expect(generatedSet.intervals.length).toBe(4);
+      });
 
-      expect(generatedSet).not.toBe(null);
-      expect(generatedSet.intervals).not.toBe(null);
-      expect(generatedSet.current().type).toBe("Swim");
+      it('returns workout with set that has a total distance of 400', function () {
+        expect(generatedSet.totalDistance()).toBe(400);
+      });
+
+      it('returns workout with set and swim intervals', function () {
+        expect(generatedSet.current().type).toBe("Swim");
+      });
     });
   });
 
   describe('given full set to parse', function () {
+    var workout = null;
+
+    beforeEach(function() {
+      workout = parse(fullSet);
+    });
+
     it('returns workout', function () {
-      var workout = parse(fullSet);
       expect(workout).not.toBe(null);
     });
 
     it('returns workout with 1 set', function () {
-      var workout = parse(fullSet);
       expect(workout.sets.length).toBe(1);
     });
 
     it('returns workout with set named "Workout"', function () {
-      var workout = parse(fullSet);
       expect(workout.current().name).toBe("Workout");
     });
 
     it('returns workout with 7 intervals', function () {
-      var workout = parse(fullSet);
       var generatedSet = workout.current();
-
-      console.log(generatedSet.intervals);
 
       expect(generatedSet).not.toBe(null);
       expect(generatedSet.intervals).not.toBe(null);
@@ -170,56 +172,66 @@ describe('When testing the parser', function () {
   });
 
   describe('given two sets to parse', function () {
+    var workout = null;
+
+    beforeEach(function() {
+      workout = parse(twoSets);
+    });
+
     it('returns workout', function () {
-      var workout = parse(twoSets);
       expect(workout).not.toBe(null);
     });
 
     it('returns workout with 2 sets', function () {
-      var workout = parse(twoSets);
       expect(workout.sets.length).toBe(2);
     });
 
-    it('returns workout with set named "Warm-up" and "Workout"', function () {
-      var workout = parse(twoSets);
-      expect(workout.sets[0].name).toBe("Warm-up");
-      expect(workout.sets[1].name).toBe("Workout");
+    describe('the first set', function() {
+      var warmUp = null;
+
+      beforeEach(function(){
+        warmUp = workout.sets[0];
+      });
+
+      it('is valid', function() {
+        expect(warmUp).not.toBe(null);
+      })
+
+      it('is the warm-up', function(){
+        expect(warmUp.name).toBe("Warm-up");
+      });
+
+      it('contains two intervals', function() {
+        expect(warmUp.intervals).toBe(2);
+      });
+
+      it('has a distance of 500', function () {
+        expect(warmUp.totalDistance()).toBe(500);
+      });
     });
 
-    it('returns workout with warm-up set with two intervals', function () {
-      var workout = parse(twoSets);
-      var warmUp = workout.sets[0];
+    describe('the second set', function() {
+      var mainSet = null;
 
-      expect(warmUp).not.toBe(null);
-      expect(warmUp.intervals).not.toBe(null);
-      expect(warmUp.intervals.length).toBe(2);
-    });
+      beforeEach(function(){
+        mainSet = workout.sets[1];
+      });
 
-    it('returns workout with warm-up set with distance 500', function () {
-      var workout = parse(twoSets);
-      var warmUp = workout.sets[0];
+      it('is valid', function() {
+        expect(mainSet).not.toBe(null);
+      })
 
-      expect(warmUp).not.toBe(null);
-      expect(warmUp.intervals).not.toBe(null);
-      expect(warmUp.totalDistance()).toBe(500);
-    });
+      it('is the Workout', function(){
+        expect(mainSet.name).toBe("Workout");
+      });
 
-    it('returns workout with workout set with seven intervals', function () {
-      var workout = parse(twoSets);
-      var mainSet = workout.sets[1];
+      it('contains seven intervals', function() {
+        expect(mainSet.intervals).toBe(7);
+      });
 
-      expect(mainSet).not.toBe(null);
-      expect(mainSet.intervals).not.toBe(null);
-      expect(mainSet.intervals.length).toBe(7);
-    });
-
-    it('returns workout with workout set with distance 1400', function () {
-      var workout = parse(twoSets);
-      var mainSet = workout.sets[1];
-
-      expect(mainSet).not.toBe(null);
-      expect(mainSet.intervals).not.toBe(null);
-      expect(mainSet.totalDistance()).toBe(1400);
+      it('has a distance of 1400', function () {
+        expect(mainSet.totalDistance()).toBe(500);
+      });
     });
   });
 });
