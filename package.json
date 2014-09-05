@@ -1,0 +1,28 @@
+{
+  "name": "swim-parser",
+  "version": "0.0.0",
+  "description": "Parse a swim set into a set of workout objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duereg/swim-parser.git"
+  },
+  "keywords": [
+    "swim",
+    "parser",
+    "workout",
+    "fitness"
+  ],
+  "author": "Matt Blair",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duereg/swim-parser/issues"
+  },
+  "homepage": "https://github.com/duereg/swim-parser",
+  "dependencies": {
+    "underscore": "^1.7.0"
+  }
+}
