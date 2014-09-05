@@ -15,8 +15,8 @@ set.prototype.setStuff = function(key, value) {
   }
 };
 
-set.prototype.addInterval = function(intervalToAdd) { 
-  if(intervalToAdd === null) throw "Give me a valid interval, would you?";
+set.prototype.addInterval = function(intervalToAdd) {
+  if(intervalToAdd === null) throw new Error("Give me a valid interval, would you?");
   if(intervalToAdd === undefined) intervalToAdd = new interval()
   this.intervals.push(intervalToAdd);
   return intervalToAdd;
@@ -25,9 +25,9 @@ set.prototype.addInterval = function(intervalToAdd) {
 set.prototype.current = function() {
   var interval = null;
   var intervalLength = this.intervals.length
-  
+
   if(intervalLength > 0) {
-    interval = this.intervals[intervalLength - 1] 
+    interval = this.intervals[intervalLength - 1]
   } else {
     interval = this.addInterval();
   }
@@ -40,7 +40,7 @@ set.prototype.changeToMulti = function() {
   this.current().distance = 0;
   for(var i = 1; i < this.multiSet; i++) {
     this.addInterval();
-  } 
+  }
 }
 
 set.prototype.reset = function() {
@@ -57,8 +57,8 @@ set.prototype.setTime = function(time) {
 
 set.prototype.setType = function(type) {
   this.setStuff("type", type);
-}; 
- 
+};
+
 set.prototype.totalDistance = function() {
   return actions.sum(this.intervals, "distance");
 }
