@@ -15,8 +15,8 @@ set::setStuff = (key, value) ->
   return
 
 set::addInterval = (intervalToAdd) ->
-  throw new Error("Give me a valid interval, would you?")  if intervalToAdd is null
-  intervalToAdd = new interval()  if intervalToAdd is `undefined`
+  throw new Error("Invalid interval given")  if intervalToAdd is null
+  intervalToAdd = new interval()  unless intervalToAdd?
   @intervals.push intervalToAdd
   intervalToAdd
 
