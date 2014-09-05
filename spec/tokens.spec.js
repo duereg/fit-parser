@@ -1,4 +1,4 @@
-var tokens = require('../src/tokens.js');
+var tokens = require('../lib/tokens.js');
 
 describe('Working with the token determiner Library', function () {
 

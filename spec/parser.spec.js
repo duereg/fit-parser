@@ -1,4 +1,4 @@
-var parse = require('../src/parser.js');
+var parse = require('../lib/parser.js');
 
 describe('When testing the parser', function () {
 

@@ -1,4 +1,4 @@
-var integer = require('../src/int.js');
+var integer = require('../lib/int.js');
 
 describe('Working with the Integer Library', function () {
 
