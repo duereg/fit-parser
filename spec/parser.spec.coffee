@@ -145,11 +145,18 @@ describe "parser", ->
     beforeEach ->
       workout = parse(twoSets)
 
-    it "returns workout", ->
-      expect(workout).not.to.eq null
+    describe "the workout", ->
+      it "is valid", ->
+        expect(workout).not.to.eq null
 
-    it "returns workout with 2 sets", ->
-      expect(workout.sets.length).to.eq 2
+      it "has 2 sets", ->
+        expect(workout.sets.length).to.eq 2
+
+      it "has a total distance of 1900 yards", ->
+        expect(workout.totalDistance()).to.eq 1900
+
+      # it "has a total time of 40 minutes", ->
+      #   expect(workout.totalTime()).to.eq "40:00"
 
     describe "the first set", ->
       warmUp = null
