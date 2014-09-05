@@ -1,8 +1,8 @@
 {
   "name": "swim-parser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Parse a swim set into a set of workout objects",
-  "keywords": [],
+  "keywords": ["fitness", "swimming", "workouts", "sets", "parser"],
   "homepage": "https://github.com/duereg/swim-parser",
   "bugs": "https://github.com/duereg/swim-parser/issues",
   "author": {
