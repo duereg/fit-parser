@@ -1,4 +1,40 @@
-swim-parser
-===========
+# swim-parser
 
-Parse a swim set into a set of workout objects
+[![Dependency status](https://david-dm.org/duereg/swim-parser.svg)](https://david-dm.org/duereg/swim-parser)
+[![devDependency Status](https://david-dm.org/duereg/swim-parser/dev-status.svg)](https://david-dm.org/duereg/swim-parser#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/duereg/swim-parser.svg?branch=master)](https://travis-ci.org/duereg/swim-parser)
+[![NPM](https://nodei.co/npm/swim-parser.svg)](https://npmjs.org/package/swim-parser)
+
+## Installation
+
+    npm install swim-parser
+
+## Usage Example
+
+## Testing
+
+    npm test
+
+## License
+
+The MIT License (MIT)
+
+Copyright 2014 Matt
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
