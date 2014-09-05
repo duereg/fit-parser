@@ -1,5 +1,5 @@
-set = require("./set.js")
-actions = require("./actions.js")
+set = require("./set")
+actions = require("./actions")
 
 workout = ->
   @sets = []

@@ -1,5 +1,5 @@
-interval = require("./interval.js")
-actions = require("./actions.js")
+interval = require("./interval")
+actions = require("./actions")
 
 set = (setName) ->
   @intervals = []

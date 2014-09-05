@@ -1,9 +1,9 @@
-set = require("./set.js")
-workout = require("./workout.js")
-integer = require("./int.js")
-tokenActions = require("./tokens.js")
+set = require("./set")
+workout = require("./workout")
+integer = require("./int")
+tokenActions = require("./tokens")
 _ = require("underscore")
-require "./string.js"
+require "./string"
 
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
 parseLine = (lines, work) ->
