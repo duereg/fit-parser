@@ -21,13 +21,13 @@ set::addInterval = (intervalToAdd) ->
   intervalToAdd
 
 set::current = ->
-  interval = null
+  currentInterval = null
   intervalLength = @intervals.length
   if intervalLength > 0
-    interval = @intervals[intervalLength - 1]
+    currentInterval = @intervals[intervalLength - 1]
   else
-    interval = @addInterval()
-  interval
+    currentInterval = @addInterval()
+  currentInterval
 
 set::changeToMulti = ->
   @multiSet = @current().distance

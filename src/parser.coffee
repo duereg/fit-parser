@@ -1,8 +1,8 @@
-set = require("./set")
+_ = require("underscore")
+
 workout = require("./workout")
 integer = require("./int")
 tokenActions = require("./tokens")
-_ = require("underscore")
 require "./string"
 
 #NUM_INTERVALS X DISTANCE TYPE @ TIME

@@ -1,15 +1,17 @@
 set = require("./set")
 actions = require("./actions")
 
+units =
+  yards: 1
+  meters: 1.3
+
 workout = ->
   @sets = []
-  @unit = workout.units.yards
+  @unit = units.yards
   @poolLength = 25
   return
 
-workout.units =
-  yards: 1
-  meters: 1.3
+workout.units = units
 
 workout::addSet = (setName) ->
   newSet = new set(setName)
@@ -17,13 +19,15 @@ workout::addSet = (setName) ->
   newSet
 
 workout::current = ->
-  set = null
+  currentSet = null
+
   setLength = @sets.length
   if setLength > 0
-    set = @sets[setLength - 1]
+    currentSet = @sets[setLength - 1]
   else
-    set = @addSet()
-  set
+    currentSet = @addSet()
+
+  currentSet
 
 workout::totalDistance = ->
   actions.sum @sets, "totalDistance"
