@@ -1,5 +1,6 @@
 {expect} = require "./spec-helper"
 parse = require("../lib/parser")
+moment = require "moment"
 
 fullExample = """
 Warm-up
@@ -48,8 +49,8 @@ intervalSet = "4x100  Swim @ 1:30"
 
 describe "parser", ->
 
-  it "given null to parse, returns null", ->
-    expect(parse(null)).to.eq null
+  it "given null to parse, throws", ->
+    expect(() -> parse(null)).to.throw "You must provide a valid string to parse to continue."
 
   describe "given a Set Name to parse", ->
     workout = null
@@ -155,8 +156,9 @@ describe "parser", ->
       it "has a total distance of 1900 yards", ->
         expect(workout.totalDistance()).to.eq 1900
 
-      # it "has a total time of 40 minutes", ->
-      #   expect(workout.totalTime()).to.eq "40:00"
+      it "has a total time of 40 minutes", ->
+        expect(workout.totalTime()).to.eq 2400000
+        expect(moment.duration(workout.totalTime()).humanize()).to.eq "40 minutes"
 
     describe "the first set", ->
       warmUp = null

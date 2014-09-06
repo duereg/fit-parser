@@ -1,3 +1,4 @@
+moment = require('moment')
 _ = require("underscore")
 
 workout = require("./workout")
@@ -17,6 +18,7 @@ parseLine = (lines, work) ->
     processTokens tokens, work  if notAllEmpty
   return
 
+#TODO: Break into chain of responsibility
 processTokens = (tokens, work) ->
   numStartTokens = tokens.length
   currentSet = work.current()
@@ -45,7 +47,7 @@ processTokens = (tokens, work) ->
       continue
     else if tokenActions.isTime(token)
       #time token handler
-      currentSet.setTime tokenActions.parseTime(token)
+      currentSet.setTime moment.duration("00:#{token}")
     else
       #string token handler
       if numStartTokens is 1
@@ -62,8 +64,7 @@ processTokens = (tokens, work) ->
   return
 
 parser = (stringToParse) ->
-  throw new Error("You must provide a valid string to parse to continue.")  if stringToParse is `undefined`
-  return stringToParse  if stringToParse is null
+  throw new Error("You must provide a valid string to parse to continue.") unless stringToParse?
   lines = stringToParse.split("\n")
   workToMake = new workout()
   parseLine lines, workToMake

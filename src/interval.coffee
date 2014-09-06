@@ -3,5 +3,5 @@
 module.exports = ->
   @distance = 0
   @type = ""
-  @time = null
+  @time = 0
   return

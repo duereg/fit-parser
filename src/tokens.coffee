@@ -15,7 +15,3 @@ module.exports =
 
   isTime: (str) ->
     @isTimeRegex.test str
-
-  parseTime: (str) ->
-    #TODO: fix implementation
-    str
