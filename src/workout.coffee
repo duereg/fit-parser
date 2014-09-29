@@ -1,4 +1,4 @@
-set = require("./set")
+Set = require("./set")
 actions = require("./actions")
 
 units =
@@ -14,7 +14,7 @@ workout = ->
 workout.units = units
 
 workout::addSet = (setName) ->
-  newSet = new set(setName)
+  newSet = new Set(setName)
   @sets.push newSet
   newSet
 
