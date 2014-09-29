@@ -13,7 +13,7 @@ class Set
     if @multiSet
       output = "#{@multiSet}x#{@current().toString()}"
     else
-      output += interval.toString() + '\n' for interval in @intervals
+      output = @intervals.map((interval) -> interval.toString()).join('\n')
 
     output
 

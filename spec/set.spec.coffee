@@ -53,4 +53,4 @@ describe "Set", ->
 
       describe 'mixed set', ->
         it 'displays correct notation for all intervals', ->
-          expect(workoutSet.toString()).to.eq "100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30\n"
+          expect(workoutSet.toString()).to.eq "100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30"
