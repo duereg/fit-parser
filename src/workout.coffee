@@ -5,34 +5,34 @@ units =
   yards: 1
   meters: 1.3
 
-workout = ->
-  @sets = []
-  @unit = units.yards
-  @poolLength = 25
-  return
+class Workout
+  constructor: ->
+    @sets = []
+    @unit = units.yards
+    @poolLength = 25
 
-workout.units = units
+  addSet: (setName) ->
+    newSet = new Set(setName)
+    @sets.push newSet
+    newSet
 
-workout::addSet = (setName) ->
-  newSet = new Set(setName)
-  @sets.push newSet
-  newSet
+  current: ->
+    currentSet = null
 
-workout::current = ->
-  currentSet = null
+    setLength = @sets.length
+    if setLength > 0
+      currentSet = @sets[setLength - 1]
+    else
+      currentSet = @addSet()
 
-  setLength = @sets.length
-  if setLength > 0
-    currentSet = @sets[setLength - 1]
-  else
-    currentSet = @addSet()
+    currentSet
 
-  currentSet
+  totalDistance: ->
+    actions.sum @sets, "totalDistance"
 
-workout::totalDistance = ->
-  actions.sum @sets, "totalDistance"
+  totalTime: ->
+    actions.sum @sets, "totalTime"
 
-workout::totalTime = ->
-  actions.sum @sets, "totalTime"
+Workout.units = units
 
-module.exports = workout
+module.exports = Workout
