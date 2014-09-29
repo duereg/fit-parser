@@ -1,64 +1,74 @@
 interval = require("./interval")
 actions = require("./actions")
 
-set = (setName) ->
-  @intervals = []
-  @name = setName or ""
-  @multiSet = 0
-  return
+class Set
+  constructor: (setName) ->
+    @intervals = []
+    @name = setName or ""
+    @multiSet = 0
 
-set::setStuff = (key, value) ->
-  if @multiSet
-    actions.set @intervals, @multiSet, key, value
-  else
-    @current()[key] = value
-  return
+  toString: ->
+    output = ''
 
-set::addInterval = (intervalToAdd) ->
-  throw new Error("Invalid interval given")  if intervalToAdd is null
-  intervalToAdd = new interval()  unless intervalToAdd?
-  @intervals.push intervalToAdd
-  intervalToAdd
+    if @multiSet
+      output = "#{@multiSet}x#{@current().toString()}"
+    else
+      output += interval.toString() + '\n' for interval in @intervals
 
-set::current = ->
-  currentInterval = null
-  intervalLength = @intervals.length
-  if intervalLength > 0
-    currentInterval = @intervals[intervalLength - 1]
-  else
-    currentInterval = @addInterval()
-  currentInterval
+    output
 
-set::changeToMulti = ->
-  @multiSet = @current().distance
-  @current().distance = 0
-  i = 1
+  setStuff: (key, value) ->
+    if @multiSet
+      actions.set @intervals, @multiSet, key, value
+    else
+      @current()[key] = value
+    return
 
-  while i < @multiSet
-    @addInterval()
-    i++
-  return
+  addInterval: (intervalToAdd) ->
+    throw new Error("Invalid interval given")  if intervalToAdd is null
+    intervalToAdd = new interval()  unless intervalToAdd?
+    @intervals.push intervalToAdd
+    intervalToAdd
 
-set::reset = ->
-  @multiSet = 0
-  return
+  current: ->
+    currentInterval = null
+    intervalLength = @intervals.length
+    if intervalLength > 0
+      currentInterval = @intervals[intervalLength - 1]
+    else
+      currentInterval = @addInterval()
+    currentInterval
 
-set::setDistance = (distance) ->
-  @setStuff "distance", distance
-  return
+  changeToMulti: ->
+    @multiSet = @current().distance
+    @current().distance = 0
+    i = 1
 
-set::setTime = (time) ->
-  @setStuff "time", time
-  return
+    while i < @multiSet
+      @addInterval()
+      i++
+    return
 
-set::setType = (type) ->
-  @setStuff "type", type
-  return
+  reset: ->
+    @multiSet = 0
+    return
 
-set::totalDistance = ->
-  actions.sum @intervals, "distance"
+  setDistance: (distance) ->
+    @setStuff "distance", distance
+    return
 
-set::totalTime = ->
-  actions.sum @intervals, "time"
+  setTime: (time) ->
+    @setStuff "time", time
+    return
 
-module.exports = set
+  setType: (type) ->
+    @setStuff "type", type
+    return
+
+  totalDistance: ->
+    actions.sum @intervals, "distance"
+
+  totalTime: ->
+    actions.sum @intervals, "time"
+
+module.exports = Set

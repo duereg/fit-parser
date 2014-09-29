@@ -2,10 +2,12 @@
 
 module.exports =
   class Interval
-    constructor: ->
-      @distance = 0
-      @type = ''
-      @time = 0
+    constructor: (options) ->
+      {@distance, @type, @time} = options if options
+
+      @distance ?= 0
+      @type ?= ''
+      @time ?= 0
 
     timeFormatted: ->
       format = ''

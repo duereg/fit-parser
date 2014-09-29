@@ -1,12 +1,14 @@
 {expect} = require "./spec-helper"
-set = require("../lib/set")
+Set = require "../lib/set"
+Interval = require "../lib/interval"
+moment = require 'moment'
 
-describe "workout-set", ->
+describe "Set", ->
   describe "Creating a new set", ->
     {workoutSet} = {}
 
     beforeEach ->
-      workoutSet = new set("set 1")
+      workoutSet = new Set("set 1")
 
     it "creates an array of empty intervals", ->
       expect(workoutSet.intervals).to.eql []
@@ -35,3 +37,20 @@ describe "workout-set", ->
 
       it "calling with no params creates an empty interval", ->
         expect(workoutSet.addInterval()).to.be.ok
+
+    describe "::toString", ->
+      beforeEach ->
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
+
+      describe 'multi-set', ->
+        beforeEach ->
+          workoutSet.multiSet = 3
+
+        it 'displays correct set notation for all intervals', ->
+          expect(workoutSet.toString()).to.eq "3x100 huho @ 1:30"
+
+      describe 'mixed set', ->
+        it 'displays correct notation for all intervals', ->
+          expect(workoutSet.toString()).to.eq "100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30\n"
