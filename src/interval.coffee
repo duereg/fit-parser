@@ -14,7 +14,16 @@ module.exports =
 
       if @time.hours()
         format += @time.hours() + ":"
-      format += @time.minutes() + ":" + @time.seconds()
+
+      if @time.minutes() is 0 and @time.hours()
+        format += "00:"
+      else
+        format += @time.minutes() + ":"
+
+      if @time.seconds() is 0
+        format += "00"
+      else
+        format += @time.seconds()
 
       format
 

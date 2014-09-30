@@ -1,32 +1,18 @@
-interval = require("./interval")
+Interval = require("./interval")
+IntervalSet = require("./intervalSet")
 actions = require("./actions")
 
 class Set
   constructor: (setName) ->
     @intervals = []
     @name = setName or ""
-    @multiSet = 0
 
   toString: ->
-    output = ''
-
-    if @multiSet
-      output = "#{@multiSet}x#{@current().toString()}"
-    else
-      output = @intervals.map((interval) -> interval.toString()).join('\n')
-
-    output
-
-  setStuff: (key, value) ->
-    if @multiSet
-      actions.set @intervals, @multiSet, key, value
-    else
-      @current()[key] = value
-    return
+    @intervals.map((interval) -> interval.toString()).join('\n')
 
   addInterval: (intervalToAdd) ->
     throw new Error("Invalid interval given")  if intervalToAdd is null
-    intervalToAdd = new interval()  unless intervalToAdd?
+    intervalToAdd = new Interval()  unless intervalToAdd?
     @intervals.push intervalToAdd
     intervalToAdd
 
@@ -40,35 +26,37 @@ class Set
     currentInterval
 
   changeToMulti: ->
-    @multiSet = @current().distance
-    @current().distance = 0
-    i = 1
-
-    while i < @multiSet
-      @addInterval()
-      i++
-    return
-
-  reset: ->
-    @multiSet = 0
-    return
+    # console.log("change to multi called", @current().distance)
+    numIntervals = @current().distance
+    #remove single interval
+    @intervals.pop()
+    #replace with interval set
+    @addInterval new IntervalSet(numIntervals)
 
   setDistance: (distance) ->
-    @setStuff "distance", distance
-    return
+    @current().distance = distance
 
   setTime: (time) ->
-    @setStuff "time", time
-    return
+    @current().time = time
 
   setType: (type) ->
-    @setStuff "type", type
-    return
+    @current().type = type
 
   totalDistance: ->
     actions.sum @intervals, "distance"
 
   totalTime: ->
     actions.sum @intervals, "time"
+
+  totalIntervals: ->
+    total = 0
+
+    for interval in @intervals
+      if interval?.intervals
+        total += interval.intervals.length
+      else
+        total += 1
+
+    total
 
 module.exports = Set

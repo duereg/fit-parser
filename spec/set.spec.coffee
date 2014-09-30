@@ -13,9 +13,6 @@ describe "Set", ->
     it "creates an array of empty intervals", ->
       expect(workoutSet.intervals).to.eql []
 
-    it "creates a multi-set property equal to 0", ->
-      expect(workoutSet.multiSet).to.eq 0
-
     it "sets the name to the given value", ->
       expect(workoutSet.name).to.eq "set 1"
 
@@ -38,18 +35,22 @@ describe "Set", ->
       it "calling with no params creates an empty interval", ->
         expect(workoutSet.addInterval()).to.be.ok
 
+    describe "::changeToMulti", ->
+      beforeEach ->
+        workoutSet.current().distance = 2
+        workoutSet.changeToMulti()
+
+      it "removes the previous interval", ->
+        expect(workoutSet.current().distance).not.to.eq 2
+
+      it "creates an intervalSet to replace the previous interval", ->
+        expect(workoutSet.current().intervals.length).to.eq 2
+
     describe "::toString", ->
       beforeEach ->
         workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
         workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
         workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
-
-      describe 'multi-set', ->
-        beforeEach ->
-          workoutSet.multiSet = 3
-
-        it 'displays correct set notation for all intervals', ->
-          expect(workoutSet.toString()).to.eq "3x100 huho @ 1:30"
 
       describe 'mixed set', ->
         it 'displays correct notation for all intervals', ->

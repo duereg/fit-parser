@@ -11,6 +11,9 @@ class Workout
     @unit = units.yards
     @poolLength = 25
 
+  toString: ->
+    @sets.map((set) -> set.toString()).join('\n')
+
   addSet: (setName) ->
     newSet = new Set(setName)
     @sets.push newSet
@@ -32,6 +35,11 @@ class Workout
 
   totalTime: ->
     actions.sum @sets, "totalTime"
+
+  totalIntervals: ->
+    total = 0
+    total += set.totalIntervals() for set in @sets
+    total
 
 Workout.units = units
 

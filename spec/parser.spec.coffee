@@ -112,14 +112,13 @@ describe "parser", ->
         expect(generatedSet.intervals).not.to.eq null
 
       it "returns workout with set and 4 intervals", ->
-        expect(generatedSet.intervals.length).to.eq 4
+        expect(generatedSet.current().intervals.length).to.eq 4
 
       it "returns workout with set that has a total distance of 400", ->
         expect(generatedSet.totalDistance()).to.eq 400
 
       it "returns workout with set and swim intervals", ->
         expect(generatedSet.current().type).to.eq "Swim"
-
 
   describe "given full set to parse", ->
     workout = null
@@ -137,9 +136,7 @@ describe "parser", ->
 
     it "returns workout with 7 intervals", ->
       generatedSet = workout.current()
-      expect(generatedSet).not.to.eq null
-      expect(generatedSet.intervals).not.to.eq null
-      expect(generatedSet.intervals.length).to.eq 7
+      expect(generatedSet.totalIntervals()).to.eq 7
 
   describe "given two sets to parse", ->
     workout = null
@@ -175,11 +172,10 @@ describe "parser", ->
         expect(warmUp.intervals).not.to.eq null
 
       it "contains two intervals", ->
-        expect(warmUp.intervals.length).to.eq 2
+        expect(warmUp.totalIntervals()).to.eq 2
 
       it "has a distance of 500", ->
         expect(warmUp.totalDistance()).to.eq 500
-
 
     describe "the second set", ->
       mainSet = null
@@ -196,8 +192,7 @@ describe "parser", ->
         expect(mainSet.intervals).not.to.eq null
 
       it "contains seven intervals", ->
-        expect(mainSet.intervals.length).to.eq 7
+        expect(mainSet.totalIntervals()).to.eq 7
 
       it "has a distance of 1400", ->
         expect(mainSet.totalDistance()).to.eq 1400
-

@@ -59,10 +59,6 @@ processTokens = (tokens, work) ->
       else
         currentSet.setType token
 
-  #line is done - now what?
-  currentSet.reset()
-  return
-
 parser = (stringToParse) ->
   throw new Error("You must provide a valid string to parse to continue.") unless stringToParse?
   lines = stringToParse.split("\n")

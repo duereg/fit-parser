@@ -6,22 +6,19 @@ actions =
     _.each collection, (item) ->
       if _.isFunction(item[field])
         total = total + item[field]()
+      else if _.isString(item[field])
+        total = item[field]
       else
         total = total + item[field]
       return
     total
 
-  set: (collection, amount, field, value) ->
-    i = collection.length - amount
-    len = collection.length
-
-    while i < len
-      item = collection[i]
+  set: (collection, field, value) ->
+    for item in collection
       if _.isFunction(item[field])
         item[field] value
       else
         item[field] = value
-      i++
     return
 
 module.exports = actions
