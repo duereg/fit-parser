@@ -8,7 +8,10 @@ class Set
     @name = setName or ""
 
   toString: ->
-    @intervals.map((interval) -> interval.toString()).join('\n')
+    output = ""
+    output += @name + '\n' if @name.length
+    output += @intervals.map((interval) -> interval.toString()).join('\n')
+    output
 
   addInterval: (intervalToAdd) ->
     throw new Error("Invalid interval given")  if intervalToAdd is null

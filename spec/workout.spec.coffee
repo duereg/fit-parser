@@ -24,7 +24,7 @@ describe 'Workout', ->
       expect(workout.totalIntervals()).to.eq 1
 
     it 'formats correctly', ->
-      expect(workout.toString()).to.eq '1000 swim @ 20:00'
+      expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00'
 
     describe "adding an interval set", ->
       beforeEach ->
@@ -44,4 +44,4 @@ describe 'Workout', ->
           expect(workout.totalIntervals()).to.eq 5
 
         it 'formats correctly', ->
-          expect(workout.toString()).to.eq '1000 swim @ 20:00\n4x75 ouou @ 1:10'
+          expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00\n4x75 ouou @ 1:10'
