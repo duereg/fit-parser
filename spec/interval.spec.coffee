@@ -7,10 +7,16 @@ describe 'interval', ->
 
   beforeEach ->
     int = new Interval()
-    int.type = 'huho'
-    int.distance = 100
 
-  describe "toString", ->
+  describe "::isEmpty", ->
+    it 'is true for interval with default values', ->
+      expect(int.isEmpty()).to.be.true
+
+  describe "::toString", ->
+    beforeEach ->
+      int.type = 'huho'
+      int.distance = 100
+
     it 'with time not set, formats correctly', ->
       expect(int.toString()).to.eq '100 huho'
 

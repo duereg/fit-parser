@@ -16,6 +16,9 @@ class IntervalSet
         @intervals.push new Interval()
         i++
 
+  isEmpty: ->
+    @intervals.length is 0
+
   current: ->
     currentInterval = null
     intervalLength = @intervals.length

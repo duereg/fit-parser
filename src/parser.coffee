@@ -50,12 +50,16 @@ processTokens = (tokens, work) ->
       currentSet.setTime moment.duration("00:#{token}")
     else
       #string token handler
-      if numStartTokens is 1
+      if currentSet.current().isEmpty()
         currentSet.intervals.pop() #Delete created interval - not needed
+        tokens.unshift(token) #add token back to tokens
+        name = tokens.join(' ') #generate name from all strings
+        tokens.length = 0 #empty tokens - we're done
+
         if currentSet.name.isEmpty()
-          currentSet.name = token
+          currentSet.name = name
         else
-          currentSet = work.addSet(token)
+          currentSet = work.addSet(name)
       else
         currentSet.setType token
 

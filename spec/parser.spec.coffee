@@ -3,7 +3,7 @@ parse = require("../lib/parser")
 moment = require "moment"
 
 fullExample = """
-Warm-up
+Warm up
 
 200 Swim
 300 Kick
@@ -18,7 +18,7 @@ Workout
 
 4 * 200 OUOU @ 1:30
 
-Cooldown
+Cooling down now
 
 300 Swim
 200 Swim
@@ -51,6 +51,20 @@ describe "parser", ->
 
   it "given null to parse, throws", ->
     expect(() -> parse(null)).to.throw "You must provide a valid string to parse to continue."
+
+  describe "Given a full example to parse", ->
+    {workout} = {}
+
+    beforeEach ->
+      workout = parse(fullExample)
+
+    it 'parses the workout into three sets', ->
+      expect(workout.sets.length).to.eq 3
+
+    it 'names each set correctly', ->
+      expect(workout.sets[0].name).to.eq "Warm up"
+      expect(workout.sets[1].name).to.eq "Workout"
+      expect(workout.sets[2].name).to.eq "Cooling down now"
 
   describe "given a Set Name to parse", ->
     workout = null

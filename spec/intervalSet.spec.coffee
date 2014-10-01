@@ -14,6 +14,9 @@ describe "IntervalSet", ->
     it "creates a populated array", ->
       expect(set.intervals.length).to.eq(4)
 
+    it "::isEmpty returns false", ->
+      expect(set.isEmpty()).to.be.false
+
     describe 'setting distance', ->
       beforeEach ->
         set.distance = 100
@@ -30,6 +33,9 @@ describe "IntervalSet", ->
 
     it "outputs an empty string", ->
       expect(set.toString()).to.eq ""
+
+    it "::isEmpty returns true", ->
+      expect(set.isEmpty()).to.be.true
 
     describe "::current", ->
       {interval} = {}

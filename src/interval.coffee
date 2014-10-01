@@ -27,6 +27,9 @@ module.exports =
 
       format
 
+    isEmpty: ->
+      @distance is 0 and @type is '' and @time is 0
+
     toString: ->
       if @time.humanize?
         "#{@distance} #{@type} @ #{@timeFormatted()}"
