@@ -36,7 +36,7 @@ class IntervalSet
 
   toString: ->
     if @intervals.length
-      "#{@intervals.length}x#{@current().distance} #{@current().type} @ #{@current().timeFormatted()}"
+      "#{@intervals.length}x#{@current().toString()}"
     else
       ""
 

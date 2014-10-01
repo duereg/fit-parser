@@ -32,6 +32,9 @@ module.exports =
 
     toString: ->
       if @time.humanize?
-        "#{@distance} #{@type} @ #{@timeFormatted()}"
+        if @distance
+          "#{@distance} #{@type} @ #{@timeFormatted()}"
+        else
+          "#{@timeFormatted()} #{@type}"
       else
         "#{@distance} #{@type}"
