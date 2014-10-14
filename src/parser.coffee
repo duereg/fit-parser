@@ -1,10 +1,10 @@
-moment = require('moment')
-_ = require("underscore")
+moment = require 'moment'
+_ = require 'underscore'
 
-workout = require("./workout")
-integer = require("./int")
-tokenActions = require("./tokens")
-require "./string"
+workout = require './workout'
+integer = require './int'
+tokenActions = require './tokens'
+require './string'
 
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
 parseLine = (lines, work) ->
@@ -38,9 +38,9 @@ processTokens = (tokens, work) ->
     else if tokenActions.isSet(token)
       #set token handler
       newTokens = token.split(tokenActions.setDividerRegex)
-      throw new Error("Currently not supported")  if newTokens.length isnt 2
+      throw new Error('Currently not supported')  if newTokens.length isnt 2
       tokens.unshift newTokens.pop()
-      tokens.unshift "x"
+      tokens.unshift 'x'
       tokens.unshift newTokens.pop()
     else if tokenActions.isTimeDivider(token)
       #time divider token handler
@@ -64,8 +64,8 @@ processTokens = (tokens, work) ->
         currentSet.setType token
 
 parser = (stringToParse) ->
-  throw new Error("You must provide a valid string to parse to continue.") unless stringToParse?
-  lines = stringToParse.split("\n")
+  throw new Error('You must provide a valid string to parse to continue.') unless stringToParse?
+  lines = stringToParse.split('\n')
   workToMake = new workout()
   parseLine lines, workToMake
   workToMake
