@@ -1,20 +1,20 @@
-Interval = require("./interval")
-IntervalSet = require("./intervalSet")
-actions = require("./actions")
+Interval = require('./interval')
+IntervalSet = require('./intervalSet')
+actions = require('./actions')
 
 class Set
   constructor: (setName) ->
     @intervals = []
-    @name = setName or ""
+    @name = setName or ''
 
   toString: ->
-    output = ""
+    output = ''
     output += @name + '\n' if @name.length
     output += @intervals.map((interval) -> interval.toString()).join('\n')
     output
 
   addInterval: (intervalToAdd) ->
-    throw new Error("Invalid interval given")  if intervalToAdd is null
+    throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval()  unless intervalToAdd?
     @intervals.push intervalToAdd
     intervalToAdd
@@ -29,7 +29,6 @@ class Set
     currentInterval
 
   changeToMulti: ->
-    # console.log("change to multi called", @current().distance)
     numIntervals = @current().distance
     #remove single interval
     @intervals.pop()
@@ -46,10 +45,10 @@ class Set
     @current().type = type
 
   totalDistance: ->
-    actions.sum @intervals, "distance"
+    actions.sum @intervals, 'distance'
 
   totalTime: ->
-    actions.sum @intervals, "time"
+    actions.sum @intervals, 'time'
 
   totalIntervals: ->
     total = 0
