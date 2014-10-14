@@ -1,5 +1,5 @@
-Set = require("./set")
-actions = require("./actions")
+Set = require('./set')
+actions = require('./actions')
 
 units =
   yards: 1
@@ -31,10 +31,10 @@ class Workout
     currentSet
 
   totalDistance: ->
-    actions.sum @sets, "totalDistance"
+    actions.sum @sets, 'totalDistance'
 
   totalTime: ->
-    actions.sum @sets, "totalTime"
+    actions.sum @sets, 'totalTime'
 
   totalIntervals: ->
     total = 0
