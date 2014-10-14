@@ -1,6 +1,6 @@
-Interval = require "./interval"
-propertyFactory = require "./propertyFactory"
-moment = require "moment"
+Interval = require './interval'
+propertyFactory = require './propertyFactory'
+moment = require 'moment'
 
 class IntervalSet
   constructor: (numIntervals) ->
@@ -29,7 +29,7 @@ class IntervalSet
     currentInterval
 
   addInterval: (intervalToAdd) ->
-    throw new Error("Invalid interval given")  if intervalToAdd is null
+    throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval() unless intervalToAdd?
     @intervals.push intervalToAdd
     intervalToAdd
@@ -38,6 +38,6 @@ class IntervalSet
     if @intervals.length
       "#{@intervals.length}x#{@current().toString()}"
     else
-      ""
+      ''
 
 module.exports = IntervalSet
