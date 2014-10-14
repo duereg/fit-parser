@@ -11,7 +11,7 @@ module.exports =
     @isSetDividerRegex.test str
 
   isTimeDivider: (str) ->
-    str is "@"
+    str is '@'
 
   isTime: (str) ->
     @isTimeRegex.test str
