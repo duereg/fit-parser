@@ -1,4 +1,5 @@
-#code snippets stolen from http://usefulscripts.wordpress.com/2008/10/02/integer-parsing-in-javascript/
+# code snippets stolen from
+# http://usefulscripts.wordpress.com/2008/10/02/integer-parsing-in-javascript/
 
 integer =
   isNumRegEx: /^\d+$/
