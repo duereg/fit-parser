@@ -13,6 +13,14 @@ describe 'timeFormatter', ->
     it 'throw', ->
       expect(timeFormatter).to.throw
 
+  describe 'given a number of milliseconds', ->
+    {fiveMinutes} = {}
+    beforeEach ->
+      fiveMinutes = 5 * 60 * 1000
+
+    it 'returns a valid respresentation', ->
+      expect(timeFormatter(fiveMinutes)).to.eq '5:00'
+
   describe 'given a object with time properties', ->
     {fiveMinutes} = {}
     beforeEach ->

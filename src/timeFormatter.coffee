@@ -1,11 +1,12 @@
 moment = require('moment')
+_ = require('underscore')
 
 module.exports = (time) ->
   format = ''
 
   throw new Error("Invalid time given") unless time?
 
-  unless time.hours?
+  if not _(time.hours).isFunction() and (_(time).isObject() or _(time).isNumber())
     time = moment.duration(time)
 
   if time.hours()
