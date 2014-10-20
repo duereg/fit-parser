@@ -1,5 +1,5 @@
-{expect} = require "./spec-helper"
-require("../lib/string")
+{expect} = require "../spec-helper"
+require("../../lib/parser/string")
 
 describe "string:: extensions", ->
   describe "trim", ->

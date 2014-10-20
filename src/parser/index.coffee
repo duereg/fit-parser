@@ -1,7 +1,7 @@
 moment = require 'moment'
 _ = require 'underscore'
 
-workout = require './workout'
+workout = require '../workout'
 integer = require './int'
 tokenActions = require './tokens'
 require './string'

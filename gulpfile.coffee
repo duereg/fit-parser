@@ -1,19 +1,23 @@
 # Load all required libraries.
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+
+clean = require('gulp-clean')
 coffee = require 'gulp-coffee'
+coffeelint = require('gulp-coffeelint')
 istanbul = require 'gulp-istanbul'
 mocha = require 'gulp-mocha'
-coffeelint = require('gulp-coffeelint')
 
+gulp.task 'clean', ->
+  gulp.src(['lib/**/*.js'], read: false).pipe(clean())
 
 gulp.task 'coffee', ->
-  gulp.src './src/**/*.coffee'
+  gulp.src ['src/**/*.coffee']
     .pipe coffee({bare: true}).on('error', gutil.log)
-    .pipe gulp.dest './lib/'
+    .pipe gulp.dest 'lib'
 
 gulp.task 'lint', ->
-  gulp.src './src/*.coffee'
+  gulp.src 'src/**/*.coffee'
     .pipe coffeelint()
     .pipe coffeelint.reporter()
 
@@ -25,5 +29,5 @@ gulp.task 'test', ['coffee', 'lint'], ->
         .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script'
         .pipe istanbul.writeReports() # Creating the reports after tests run
 
-gulp.task 'default', ['coffee']
-gulp.task 'build', ['lint', 'coffee', 'test']
+gulp.task 'default', ['clean', 'coffee']
+gulp.task 'build', ['lint', 'clean', 'coffee', 'test']
