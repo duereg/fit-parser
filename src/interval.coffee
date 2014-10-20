@@ -1,5 +1,7 @@
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
 
+timeFormatter = require('./timeFormatter')
+
 module.exports =
   class Interval
     constructor: (options) ->
@@ -9,32 +11,14 @@ module.exports =
       @type ?= ''
       @time ?= 0
 
-    timeFormatted: ->
-      format = ''
-
-      if @time.hours()
-        format += @time.hours() + ':'
-
-      if @time.minutes() is 0 and @time.hours()
-        format += '00:'
-      else
-        format += @time.minutes() + ':'
-
-      if @time.seconds() is 0
-        format += '00'
-      else
-        format += @time.seconds()
-
-      format
-
     isEmpty: ->
       @distance is 0 and @type is '' and @time is 0
 
     toString: ->
       if @time.humanize?
         if @distance
-          "#{@distance} #{@type} @ #{@timeFormatted()}"
+          "#{@distance} #{@type} @ #{timeFormatter(@time)}"
         else
-          "#{@timeFormatted()} #{@type}"
+          "#{timeFormatter(@time)} #{@type}"
       else
         "#{@distance} #{@type}"
