@@ -16,7 +16,7 @@
     "email": "",
     "url": "https://github.com/duereg"
   },
-  "main": "./lib/parser.js",
+  "main": "./lib/parser/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/duereg/swim-parser.git"
