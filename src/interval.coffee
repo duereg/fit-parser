@@ -1,5 +1,5 @@
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
-
+#noTime = { milliseconds: 0, seconds: 0, minutes: 0, hours: 0, days: 0, months: 0, years: 0 }
 timeFormatter = require('./timeFormatter')
 
 module.exports =
