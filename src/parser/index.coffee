@@ -2,7 +2,6 @@ moment = require 'moment'
 _ = require 'underscore'
 
 workout = require '../workout'
-integer = require './int'
 tokenActions = require './tokens'
 require './string'
 
@@ -29,9 +28,9 @@ processTokens = (tokens, work) ->
     if token.isEmpty()
       #do nothing - this is the emptyTokenHandler
       continue
-    else if integer.isNumber(token)
+    else if tokenActions.isNumber(token)
       #numberTokenHandler
-      currentSet.setDistance parseInt(token)
+      currentSet.setDistance tokenActions.getNumber(token)
     else if tokenActions.isSetDivider(token)
       #set divider token handler
       currentSet.changeToMulti()
@@ -48,6 +47,9 @@ processTokens = (tokens, work) ->
     else if tokenActions.isTime(token)
       #time token handler
       currentSet.setTime moment.duration("00:#{token}")
+    else if tokenActions.isRest(token)
+      rest = tokenActions.getRest(token)
+      currentSet.setRest moment.duration("00:#{rest}")
     else
       #string token handler
       if currentSet.current().isEmpty()

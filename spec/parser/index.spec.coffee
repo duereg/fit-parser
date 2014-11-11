@@ -47,6 +47,8 @@ interval = "100 Swim  @   1:30"
 
 intervalSet = "4x100  Swim @ 1:30"
 
+intervalWithRest = "100 Swim +30"
+
 describe "parser", ->
 
   it "given null to parse, throws", ->

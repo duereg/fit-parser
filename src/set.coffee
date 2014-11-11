@@ -35,6 +35,9 @@ class Set
     #replace with interval set
     @addInterval new IntervalSet(numIntervals)
 
+  setRest: (rest) ->
+    @current().rest = rest
+
   setDistance: (distance) ->
     @current().distance = distance
 
