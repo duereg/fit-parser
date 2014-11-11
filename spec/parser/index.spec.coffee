@@ -88,10 +88,27 @@ describe "parser", ->
     it "returns workout with time of 0", ->
       expect(workout.current().totalTime()).to.eq 0
 
-  describe "given interval (100 Swim @ 1:30) to parse", ->
+  describe "given interval with time (100 Swim @ 1:30) to parse", ->
     workout = null
     beforeEach ->
       workout = parse(interval)
+
+    it "returns workout", ->
+      expect(workout).not.to.eq null
+
+    it "returns workout with set", ->
+      expect(workout.sets.length).to.eq 1
+
+    it "returns workout with set and valid interval", ->
+      generatedInterval = workout.current().current()
+      expect(generatedInterval).not.to.eq null
+      expect(generatedInterval.distance).to.eq 100
+      expect(generatedInterval.type).to.eq "Swim"
+
+  describe "given interval with rest (100 Swim +30) to parse", ->
+    workout = null
+    beforeEach ->
+      workout = parse(intervalWithRest)
 
     it "returns workout", ->
       expect(workout).not.to.eq null
