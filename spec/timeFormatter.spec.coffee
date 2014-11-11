@@ -18,7 +18,7 @@ describe 'timeFormatter', ->
     beforeEach ->
       fiveMinutes = 5 * 60 * 1000
 
-    it 'returns a valid respresentation', ->
+    it 'returns a valid representation', ->
       expect(timeFormatter(fiveMinutes)).to.eq '5:00'
 
   describe 'given a object with time properties', ->
@@ -28,7 +28,7 @@ describe 'timeFormatter', ->
       beforeEach ->
         fiveMinutes = minutes: 5
 
-      it 'returns a valid respresentation', ->
+      it 'returns a valid representation', ->
         expect(timeFormatter(fiveMinutes)).to.eq '5:00'
 
     describe 'in hours', ->
@@ -37,7 +37,7 @@ describe 'timeFormatter', ->
       beforeEach ->
         fiveHours = hours: 5
 
-      it 'returns a valid respresentation', ->
+      it 'returns a valid representation', ->
         expect(timeFormatter(fiveHours)).to.eq '5:00:00'
 
   describe 'given a duration', ->
@@ -45,7 +45,7 @@ describe 'timeFormatter', ->
     beforeEach ->
       fiveMinutes = moment.duration minutes: 5
 
-    it 'returns a valid respresentation', ->
+    it 'returns a valid representation', ->
       expect(timeFormatter(fiveMinutes)).to.eq '5:00'
 
 
