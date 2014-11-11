@@ -35,6 +35,21 @@ describe "Working with the token determiner Library", ->
     it "the string \"4x100\" is not a Set Divider", ->
       expect(tokens.isSetDivider("4x100")).to.eq false
 
+
+  describe "Testing isRest", ->
+    it "the string \"+:20\" is a rest period", ->
+      expect(tokens.isRest("+:20")).to.eq true
+
+    it "the string \"+0:20\" is a rest period", ->
+      expect(tokens.isRest("+0:20")).to.eq true
+
+    it "the string \"+1:30\" is a rest period", ->
+      expect(tokens.isRest("+1:30")).to.eq true
+
+    it "the string \"abc\" is not a rest period", ->
+      expect(tokens.isRest("abc")).to.eq false
+
+
   describe "Testing isTimeDivider", ->
     it "the string \"@\" is a Time Divider", ->
       expect(tokens.isTimeDivider("@")).to.eq true

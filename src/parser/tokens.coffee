@@ -15,3 +15,10 @@ module.exports =
 
   isTime: (str) ->
     @isTimeRegex.test str
+
+  isRest: (str) ->
+    plusPosition = str.indexOf('+')
+    justTime = str.slice(plusPosition + 1)
+    isRemainderTime = @isTimeRegex.test justTime
+
+    (plusPosition > -1) and isRemainderTime
