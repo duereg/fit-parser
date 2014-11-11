@@ -6,9 +6,10 @@ class IntervalSet
   constructor: (numIntervals) ->
     @intervals = []
 
-    propertyFactory(@, @intervals, 'distance')
-    propertyFactory(@, @intervals, 'type')
-    propertyFactory(@, @intervals, 'time')
+    propertyFactory(this, @intervals, 'distance')
+    propertyFactory(this, @intervals, 'type')
+    propertyFactory(this, @intervals, 'time')
+    propertyFactory(this, @intervals, 'rest')
 
     if (numIntervals)
       i = 0

@@ -4,7 +4,7 @@ _ = require('underscore')
 module.exports = (time) ->
   format = ''
 
-  throw new Error("Invalid time given") unless time?
+  throw new Error('Invalid time given') unless time?
 
   if not _(time.hours).isFunction() and (_(time).isObject() or _(time).isNumber())
     time = moment.duration(time)

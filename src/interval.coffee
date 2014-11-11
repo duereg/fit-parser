@@ -5,19 +5,27 @@ timeFormatter = require('./timeFormatter')
 module.exports =
   class Interval
     constructor: (options) ->
-      {@distance, @type, @time} = options if options
+      {@distance, @type, @time, @rest} = options if options
 
       @distance ?= 0
       @type ?= ''
       @time ?= 0
+      @rest ?= 0
 
     isEmpty: ->
       @distance is 0 and @type is '' and @time is 0
 
     toString: ->
-      if @time.humanize?
+      if @time.humanize? or @rest.humanize?
         if @distance
-          "#{@distance} #{@type} @ #{timeFormatter(@time)}"
+          time = ''
+
+          if @time.humanize?
+            time = "@ #{timeFormatter(@time)}"
+          else if @rest.humanize?
+            time = "+#{timeFormatter(@rest)}"
+
+          "#{@distance} #{@type} #{time}"
         else
           "#{timeFormatter(@time)} #{@type}"
       else
