@@ -13,6 +13,40 @@ describe 'timeFormatter', ->
     it 'throws', ->
       expect(timeFormatter).to.throw
 
+  describe '::isEmpty', ->
+    {fiveMinutes} = {}
+
+    describe 'given a duration', ->
+      beforeEach ->
+        fiveMinutes = moment.duration minutes: 5
+
+      it 'returns a valid representation', ->
+        expect(timeFormatter.isEmpty(fiveMinutes)).to.be.false
+
+    describe 'given a number', ->
+      beforeEach ->
+        fiveMinutes = 5*60*1000
+
+      it 'returns a valid representation', ->
+        expect(timeFormatter.isEmpty(fiveMinutes)).to.be.true
+
+  describe '::toDuration', ->
+    {fiveMinutes} = {}
+
+    describe 'given a duration', ->
+      beforeEach ->
+        fiveMinutes = moment.duration minutes: 5
+
+      it 'returns a valid representation', ->
+        expect(timeFormatter.toDuration(fiveMinutes)).to.eql fiveMinutes
+
+    describe 'given a number', ->
+      beforeEach ->
+        fiveMinutes = 5*60*1000
+
+      it 'returns a valid representation', ->
+        expect(timeFormatter.toDuration(fiveMinutes)).to.eql moment.duration minutes: 5
+
   describe '::toJSON', ->
     {fiveMinutes} = {}
 
@@ -22,6 +56,20 @@ describe 'timeFormatter', ->
 
       it 'returns a valid representation', ->
         expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime, {minutes: 5})
+
+    describe 'given crap', ->
+      beforeEach ->
+        fiveMinutes = 'abc'
+
+      it 'returns the empty time representation', ->
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime)
+
+    describe 'given null', ->
+      beforeEach ->
+        fiveMinutes = null
+
+      it 'returns the empty time representation', ->
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime)
 
   describe '::toString', ->
     {fiveMinutes, fiveHours} = {}

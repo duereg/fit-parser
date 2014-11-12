@@ -14,7 +14,7 @@ describe 'interval', ->
     it 'is true for interval with default values', ->
       expect(int.isEmpty()).to.be.true
 
-  describe 'interval w/o distance ::toString', ->
+  describe 'w/o distance ::toString', ->
     beforeEach ->
       int.type = 'rest'
       int.time = moment.duration('00:20:00')
@@ -22,7 +22,7 @@ describe 'interval', ->
     it 'formats correctly', ->
       expect(int.toString()).to.eq '20:00 rest'
 
-  describe 'interval w/ distance ::toString', ->
+  describe 'w/ distance ::toString', ->
     beforeEach ->
       int.type = 'huho'
       int.distance = 100
@@ -30,7 +30,7 @@ describe 'interval', ->
     it 'with time not set, formats correctly', ->
       expect(int.toString()).to.eq '100 huho'
 
-    describe 'rest', ->
+    describe 'w/ rest', ->
       describe 'with second intervals', ->
         beforeEach ->
           int.rest = moment.duration('00:00:30')

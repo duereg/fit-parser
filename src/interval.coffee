@@ -1,5 +1,6 @@
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
 timeFormatter = require('./timeFormatter')
+_ = require 'underscore'
 
 module.exports =
   class Interval
@@ -8,26 +9,26 @@ module.exports =
 
       @distance ?= 0
       @type ?= ''
-      @time ?= 0
-      @rest ?= 0
+      @rest = timeFormatter.toDuration(@rest)
+      @time = timeFormatter.toDuration(@time)
 
     isEmpty: ->
-      @distance is 0 and @type is '' and @time is 0
+      @distance is 0 and @type is '' and timeFormatter.isEmpty(@time) and timeFormatter.isEmpty(@rest)
 
     toJSON: ->
       {time: timeFormatter.toJSON(@time), rest: timeFormatter.toJSON(@rest), @distance, @type}
 
     toString: ->
-      if @time.humanize? or @rest.humanize?
+      if not timeFormatter.isEmpty(@time) or not timeFormatter.isEmpty(@rest)
         if @distance
           time = ''
 
-          if @time.humanize?
-            time = "@ #{timeFormatter.toString(@time)}"
-          else if @rest.humanize?
-            time = "+#{timeFormatter.toString(@rest)}"
+          if not timeFormatter.isEmpty @time
+            time = " @ #{timeFormatter.toString(@time)}"
+          else if not timeFormatter.isEmpty @rest
+            time = " +#{timeFormatter.toString(@rest)}"
 
-          "#{@distance} #{@type} #{time}"
+          "#{@distance} #{@type}#{time}"
         else
           "#{timeFormatter.toString(@time)} #{@type}"
       else
