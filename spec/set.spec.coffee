@@ -4,9 +4,17 @@ Interval = require "../lib/interval"
 moment = require 'moment'
 
 describe "Set", ->
-  describe "Creating a new set", ->
-    {workoutSet} = {}
+  {workoutSet} = {}
 
+  describe 'unnamed set', ->
+    beforeEach ->
+      workoutSet = new Set()
+
+    describe "::toString", ->
+      it 'outputs nothing without content', ->
+        expect(workoutSet.toString()).to.eq ''
+
+  describe "named set", ->
     beforeEach ->
       workoutSet = new Set("set 1")
 
