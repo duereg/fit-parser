@@ -1,6 +1,8 @@
 {expect} = require './spec-helper'
 Interval = require '../lib/interval'
+timeFormatter = require '../lib/timeFormatter'
 moment = require 'moment'
+_ = require 'underscore'
 
 describe 'interval', ->
   {int} = {}
@@ -57,6 +59,19 @@ describe 'interval', ->
 
         it 'formats minutes correctly', ->
           expect(int.toString()).to.eq '100 huho @ 0:30'
+
+        describe '::toJSON', ->
+          {json} = {}
+
+          beforeEach ->
+            json = int.toJSON()
+
+          it 'outputs correctly', ->
+            expect(json).to.eql
+              time: _({}).extend(timeFormatter.noTime, {seconds: 30})
+              rest: timeFormatter.noTime
+              distance: 100
+              type: 'huho'
 
       describe 'with minute intervals', ->
         beforeEach ->

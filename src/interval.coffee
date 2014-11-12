@@ -1,5 +1,4 @@
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
-#noTime = { milliseconds: 0, seconds: 0, minutes: 0, hours: 0, days: 0, months: 0, years: 0 }
 timeFormatter = require('./timeFormatter')
 
 module.exports =
@@ -15,18 +14,21 @@ module.exports =
     isEmpty: ->
       @distance is 0 and @type is '' and @time is 0
 
+    toJSON: ->
+      {time: timeFormatter.toJSON(@time), rest: timeFormatter.toJSON(@rest), @distance, @type}
+
     toString: ->
       if @time.humanize? or @rest.humanize?
         if @distance
           time = ''
 
           if @time.humanize?
-            time = "@ #{timeFormatter(@time)}"
+            time = "@ #{timeFormatter.toString(@time)}"
           else if @rest.humanize?
-            time = "+#{timeFormatter(@rest)}"
+            time = "+#{timeFormatter.toString(@rest)}"
 
           "#{@distance} #{@type} #{time}"
         else
-          "#{timeFormatter(@time)} #{@type}"
+          "#{timeFormatter.toString(@time)} #{@type}"
       else
         "#{@distance} #{@type}"

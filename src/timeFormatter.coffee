@@ -1,7 +1,9 @@
 moment = require('moment')
 _ = require('underscore')
 
-module.exports = (time) ->
+noTime = { milliseconds: 0, seconds: 0, minutes: 0, hours: 0, days: 0, months: 0, years: 0 }
+
+toString = (time) ->
   format = ''
 
   throw new Error('Invalid time given') unless time?
@@ -23,3 +25,9 @@ module.exports = (time) ->
     format += time.seconds()
 
   format
+
+toJSON = (time) ->
+  #if time is number, set milliseconds?
+  if time.humanize? then time._data else noTime
+
+module.exports = {toString, toJSON, noTime}
