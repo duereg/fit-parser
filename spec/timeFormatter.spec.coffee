@@ -55,21 +55,21 @@ describe 'timeFormatter', ->
         fiveMinutes = moment.duration minutes: 5
 
       it 'returns a valid representation', ->
-        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime, {minutes: 5})
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({minutes: 5}).defaults(timeFormatter.noTime, )
 
     describe 'given crap', ->
       beforeEach ->
         fiveMinutes = 'abc'
 
       it 'returns the empty time representation', ->
-        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime)
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _(timeFormatter.noTime).clone()
 
     describe 'given null', ->
       beforeEach ->
         fiveMinutes = null
 
       it 'returns the empty time representation', ->
-        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({}).extend(timeFormatter.noTime)
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _(timeFormatter.noTime).clone()
 
   describe '::toString', ->
     {fiveMinutes, fiveHours} = {}
