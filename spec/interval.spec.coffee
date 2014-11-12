@@ -73,6 +73,14 @@ describe 'interval', ->
               distance: 100
               type: 'huho'
 
+          describe 'creating new interval from JSON', ->
+            newInterval = null
+            beforeEach ->
+              newInterval = new Interval json
+
+            it 'outputs the same as the original', ->
+              expect(newInterval.toString()).to.eq '100 huho @ 0:30'
+
       describe 'with minute intervals', ->
         beforeEach ->
           int.time = moment.duration('00:01:30')
