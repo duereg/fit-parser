@@ -55,7 +55,7 @@ describe 'timeFormatter', ->
         fiveMinutes = moment.duration minutes: 5
 
       it 'returns a valid representation', ->
-        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({minutes: 5}).defaults(timeFormatter.noTime, )
+        expect(timeFormatter.toJSON(fiveMinutes)).to.eql _({minutes: 5}).defaults(timeFormatter.noTime)
 
     describe 'given crap', ->
       beforeEach ->
