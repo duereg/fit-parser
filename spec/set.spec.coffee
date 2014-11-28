@@ -6,6 +6,20 @@ Set = require "../lib/set"
 Interval = require "../lib/interval"
 timeFormatter = require '../lib/timeFormatter'
 
+oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
+
+jsonIntervals = [
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+]
+
+intervals = [
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+]
+
 describe "Set", ->
   {workoutSet} = {}
 
@@ -17,6 +31,27 @@ describe "Set", ->
       it 'outputs nothing without content', ->
         expect(workoutSet.toString()).to.eq ''
 
+  describe "named set with intervals", ->
+    beforeEach ->
+      workoutSet = new Set {name: 'set 2', intervals: jsonIntervals}
+
+    it 'creates hydrated intervals from given JSON', ->
+      expect(workoutSet.intervals).to.eql intervals
+
+    it 'sets the name', ->
+      expect(workoutSet.name).to.eq "set 2"
+
+    describe "::toString", ->
+      it 'displays correct notation for all intervals', ->
+        expect(workoutSet.toString()).to.eq "set 2\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30"
+
+    describe '::toJSON', ->
+      it 'outputs JSON matching original input', ->
+        expect(workoutSet.toJSON()).to.eql {
+          name: 'set 2'
+          intervals: jsonIntervals
+        }
+
   describe "named set", ->
     beforeEach ->
       workoutSet = new Set({name: "set 1"})
@@ -24,7 +59,7 @@ describe "Set", ->
     it "creates an array of empty intervals", ->
       expect(workoutSet.intervals).to.eql []
 
-    it "sets the name to the given value", ->
+    it "sets the name", ->
       expect(workoutSet.name).to.eq "set 1"
 
     describe "::current", ->
@@ -57,15 +92,10 @@ describe "Set", ->
       it "creates an intervalSet to replace the previous interval", ->
         expect(workoutSet.current().intervals.length).to.eq 2
 
-    describe "with intervals", ->
-      {oneMinuteThirty} = {}
-
+    describe "with added intervals", ->
       beforeEach ->
-        oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
-
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+        intervals.forEach (interval) ->
+          workoutSet.addInterval interval
 
       describe "::toString", ->
         it 'displays correct notation for all intervals', ->
@@ -75,9 +105,5 @@ describe "Set", ->
         it 'outputs correct information', ->
           expect(workoutSet.toJSON()).to.eql {
             name: 'set 1'
-            intervals: [
-              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-            ]
+            intervals: jsonIntervals
           }

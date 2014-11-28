@@ -7,6 +7,7 @@ class Set
     {@name, @intervals} = options if options?
     @intervals ?= []
     @name ?= ''
+    @intervals = @intervals.map (interval) -> new Interval(interval)
 
   toString: ->
     output = ''
