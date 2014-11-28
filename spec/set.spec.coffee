@@ -19,7 +19,7 @@ describe "Set", ->
 
   describe "named set", ->
     beforeEach ->
-      workoutSet = new Set("set 1")
+      workoutSet = new Set({name: "set 1"})
 
     it "creates an array of empty intervals", ->
       expect(workoutSet.intervals).to.eql []

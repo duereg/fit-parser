@@ -15,7 +15,7 @@ class Workout
     @sets.map((set) -> set.toString()).join('\n')
 
   addSet: (setName) ->
-    newSet = new Set(setName)
+    newSet = new Set {name: setName}
     @sets.push newSet
     newSet
 

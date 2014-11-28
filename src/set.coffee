@@ -3,9 +3,10 @@ IntervalSet = require('./intervalSet')
 actions = require('./actions')
 
 class Set
-  constructor: (setName) ->
-    @intervals = []
-    @name = setName or ''
+  constructor: (options) ->
+    {@name, @intervals} = options if options?
+    @intervals ?= []
+    @name ?= ''
 
   toString: ->
     output = ''
