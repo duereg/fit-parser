@@ -13,6 +13,9 @@ class Set
     output += @intervals.map((interval) -> interval.toString()).join('\n')
     output
 
+  toJSON: ->
+    {@name, intervals: @intervals.map (interval) -> interval.toJSON()}
+
   addInterval: (intervalToAdd) ->
     throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval()  unless intervalToAdd?

@@ -1,7 +1,10 @@
+_ = require 'underscore'
+moment = require 'moment'
+
 {expect} = require "./spec-helper"
 Set = require "../lib/set"
 Interval = require "../lib/interval"
-moment = require 'moment'
+timeFormatter = require '../lib/timeFormatter'
 
 describe "Set", ->
   {workoutSet} = {}
@@ -54,12 +57,27 @@ describe "Set", ->
       it "creates an intervalSet to replace the previous interval", ->
         expect(workoutSet.current().intervals.length).to.eq 2
 
-    describe "::toString", ->
-      beforeEach ->
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
-        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
+    describe "with intervals", ->
+      {oneMinuteThirty} = {}
 
-      describe 'mixed set', ->
+      beforeEach ->
+        oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
+
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+        workoutSet.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+
+      describe "::toString", ->
         it 'displays correct notation for all intervals', ->
           expect(workoutSet.toString()).to.eq "set 1\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30"
+
+      describe '::toJSON', ->
+        it 'outputs correct information', ->
+          expect(workoutSet.toJSON()).to.eql {
+            name: 'set 1'
+            intervals: [
+              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+              {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+            ]
+          }

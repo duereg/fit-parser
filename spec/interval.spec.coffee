@@ -68,7 +68,7 @@ describe 'interval', ->
 
           it 'outputs correctly', ->
             expect(json).to.eql
-              time: _({seconds: 30}).defaults(timeFormatter.noTime, )
+              time: _({seconds: 30}).defaults(timeFormatter.noTime)
               rest: timeFormatter.noTime
               distance: 100
               type: 'huho'

@@ -13,7 +13,10 @@ module.exports =
       @time = timeFormatter.toDuration(@time)
 
     isEmpty: ->
-      @distance is 0 and @type is '' and timeFormatter.isEmpty(@time) and timeFormatter.isEmpty(@rest)
+      @distance is 0 and
+      @type is '' and
+      timeFormatter.isEmpty(@time) and
+      timeFormatter.isEmpty(@rest)
 
     toJSON: ->
       {time: timeFormatter.toJSON(@time), rest: timeFormatter.toJSON(@rest), @distance, @type}
