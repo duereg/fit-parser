@@ -1,6 +1,6 @@
 {
   "name": "swim-parser",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Parse a swim set into a set of workout objects",
   "keywords": [
     "fitness",
