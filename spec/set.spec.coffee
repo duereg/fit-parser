@@ -1,24 +1,5 @@
-_ = require 'underscore'
-moment = require 'moment'
-
-{expect} = require "./spec-helper"
 Set = require "../lib/set"
-Interval = require "../lib/interval"
-timeFormatter = require '../lib/timeFormatter'
-
-oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
-
-jsonIntervals = [
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-]
-
-intervals = [
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-]
+{expect, intervals, jsonIntervals} = require "./spec-helper"
 
 describe "Set", ->
   {workoutSet} = {}
