@@ -3,7 +3,6 @@ _ = require 'underscore'
 
 require './string'
 workout = require '../workout'
-tokenActions = require './tokens'
 handlers = require './handlers'
 
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
