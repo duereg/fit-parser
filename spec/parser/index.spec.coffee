@@ -36,14 +36,14 @@ Warm-up
 200 Swim
 300 Kick
 Workout
-4x100 HUHO @ 1:30
-1000 Kick @ 12:00
+4x100 HUHO @ :30
+1000 Kick @ 16:00
 2:00 Rest
 20:00 Swim """
 
 set = "Start"
 
-interval = "100 Swim  @   1:30"
+interval = "100 Swim  @   30"
 
 intervalSet = "4x100  Swim @ 1:30"
 
@@ -88,7 +88,7 @@ describe "parser", ->
     it "returns workout with time of 0", ->
       expect(workout.current().totalTime()).to.eq 0
 
-  describe "given interval with time (100 Swim @ 1:30) to parse", ->
+  describe "given interval with time (100 Swim @ :30) to parse", ->
     workout = null
     beforeEach ->
       workout = parse(interval)
@@ -112,7 +112,7 @@ describe "parser", ->
         expect(generatedInterval.type).to.eq "Swim"
 
       it 'had valid time', ->
-        expect(generatedInterval.time.minutes()).to.eq 1
+        expect(generatedInterval.time.minutes()).to.eq 0
         expect(generatedInterval.time.seconds()).to.eq 30
 
   describe "given interval with rest (100 Swim +30) to parse", ->
@@ -139,7 +139,7 @@ describe "parser", ->
         expect(generatedInterval.type).to.eq "Swim"
 
       it 'had valid time', ->
-        expect(generatedInterval.time.seconds()).to.eq 30
+        expect(generatedInterval.rest.seconds()).to.eq 30
 
   describe "given intervalSet (4x100 Swim @ 1:30) to parse", ->
     workout = null
@@ -209,7 +209,7 @@ describe "parser", ->
         expect(workout.totalDistance()).to.eq 1900
 
       it "has a total time of 40 minutes", ->
-        expect(workout.totalTime()).to.eq 2400000
+        expect(workout.totalTime()).to.eq 40 * 60 * 1000
         expect(moment.duration(workout.totalTime()).humanize()).to.eq "40 minutes"
 
     describe "the first set", ->

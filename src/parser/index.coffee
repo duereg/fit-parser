@@ -27,7 +27,7 @@ processTokens = (tokens, work) ->
     token = tokens.shift()
 
     for handler in handlers
-      if handler.canHandle(token)
+      if handler.canHandle(token, currentSet)
         handler.act(tokens, token, currentSet, work)
         break
 

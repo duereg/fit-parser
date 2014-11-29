@@ -1,4 +1,3 @@
-moment = require 'moment'
 tokenActions = require './tokens'
 
 module.exports =
@@ -6,4 +5,4 @@ module.exports =
     tokenActions.isTime token
 
   act: (tokens, token, currentSet) ->
-    currentSet.setTime moment.duration("00:#{token}")
+    currentSet.setTime tokenActions.getDuration token
