@@ -72,11 +72,17 @@ describe "Working with the token determiner Library", ->
     it "the string \"1:30\" is a Time", ->
       expect(tokens.isTime("1:30")).to.eq true
 
+    it "the string \"90:00\" is a Time", ->
+      expect(tokens.isTime("90:00")).to.eq true
+
     it "the string \"0:45\" is a Time", ->
       expect(tokens.isTime("0:45")).to.eq true
 
     it "the string \":20\" is a Time", ->
       expect(tokens.isTime(":20")).to.eq true
+
+    it "the string \"20\" is a Time", ->
+      expect(tokens.isTime("20")).to.eq true
 
     it "the string \"a:30\" is not a Time", ->
       expect(tokens.isTime("a:30")).to.eq false
