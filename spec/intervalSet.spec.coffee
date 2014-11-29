@@ -23,7 +23,7 @@ intervals = [
 describe "IntervalSet", ->
   {set} = {}
 
-  describe "Created a full set", ->
+  describe "Given a number of intervals", ->
     beforeEach ->
       set = new IntervalSet(4)
 
@@ -39,6 +39,24 @@ describe "IntervalSet", ->
 
       it 'sets the distance on the underlying intervals', ->
         expect(_(set.intervals).all((interval) -> interval.distance is 100)).to.be.true
+
+
+  describe "given intervals", ->
+    beforeEach ->
+      set = new IntervalSet jsonIntervals
+
+    it 'creates hydrated intervals from given JSON', ->
+      expect(set.intervals).to.eql intervals
+
+    describe "::toString", ->
+      it 'displays correct notation for all intervals', ->
+        expect(set.toString()).to.eq "3x100 huho @ 1:30"
+
+    describe '::toJSON', ->
+      it 'outputs JSON matching original input', ->
+        expect(set.toJSON()).to.eql {
+          intervals: jsonIntervals
+        }
 
   describe "Creating an empty set", ->
     beforeEach ->

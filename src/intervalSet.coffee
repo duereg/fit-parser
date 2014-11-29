@@ -1,9 +1,12 @@
+moment = require 'moment'
+_ = require 'underscore'
+
 Interval = require './interval'
 propertyFactory = require './propertyFactory'
-moment = require 'moment'
+int = require './parser/int'
 
 class IntervalSet
-  constructor: (numIntervals) ->
+  constructor: (intervals) ->
     @intervals = []
 
     propertyFactory(this, @intervals, 'distance')
@@ -11,11 +14,15 @@ class IntervalSet
     propertyFactory(this, @intervals, 'time')
     propertyFactory(this, @intervals, 'rest')
 
-    if (numIntervals)
-      i = 0
-      while i < numIntervals
-        @intervals.push new Interval()
-        i++
+    if intervals
+      if int.isNumber intervals
+        i = 0
+        while i < intervals
+          @intervals.push new Interval()
+          i++
+
+      if _(intervals).isArray()
+        @intervals = intervals.map (interval) -> new Interval(interval)
 
   isEmpty: ->
     @intervals.length is 0
