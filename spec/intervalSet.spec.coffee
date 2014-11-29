@@ -85,6 +85,12 @@ describe "IntervalSet", ->
         it 'sums the distances correctly', ->
           expect(set.distance).to.eq 300
 
+      describe '::toJSON', ->
+        it 'outputs correct information', ->
+          expect(set.toJSON()).to.eql {
+            intervals: jsonIntervals
+          }
+
       describe "time", ->
         {time} = {}
 

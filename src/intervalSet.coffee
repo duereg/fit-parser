@@ -41,4 +41,7 @@ class IntervalSet
     else
       ''
 
+  toJSON: ->
+    {intervals: @intervals.map (interval) -> interval.toJSON()}
+
 module.exports = IntervalSet
