@@ -1,18 +1,17 @@
 Set = require('./set')
 actions = require('./actions')
 
-units =
-  yards: 1
-  meters: 1.3
-
 class Workout
-  constructor: ->
-    @sets = []
-    @unit = units.yards
-    @poolLength = 25
+  constructor: (options) ->
+    {@sets} = options if options?
+    @sets ?= []
+    @sets = @sets.map (set) -> new Set(set)
 
   toString: ->
     @sets.map((set) -> set.toString()).join('\n')
+
+  toJSON: ->
+    {sets: @sets.map (set) -> set.toJSON() }
 
   addSet: (setName) ->
     newSet = new Set {name: setName}
@@ -40,7 +39,5 @@ class Workout
     total = 0
     total += set.totalIntervals() for set in @sets
     total
-
-Workout.units = units
 
 module.exports = Workout

@@ -1,4 +1,5 @@
 Set = require "../lib/set"
+Interval = require "../lib/interval"
 {expect, intervals, jsonIntervals} = require "./spec-helper"
 
 describe "Set", ->
@@ -31,6 +32,27 @@ describe "Set", ->
         expect(workoutSet.toJSON()).to.eql {
           name: 'set 2'
           intervals: jsonIntervals
+        }
+
+  describe "named set with intervalSet", ->
+    beforeEach ->
+      workoutSet = new Set {name: 'set 2', intervals: [intervals: jsonIntervals]}
+
+    it 'creates one interval', ->
+      expect(workoutSet.intervals.length).to.eq 1
+
+    it 'sets the name', ->
+      expect(workoutSet.name).to.eq "set 2"
+
+    describe "::toString", ->
+      it 'displays correct notation for all intervals', ->
+        expect(workoutSet.toString()).to.eq "set 2\n3x100 huho @ 1:30"
+
+    describe '::toJSON', ->
+      it 'outputs JSON matching original input', ->
+        expect(workoutSet.toJSON()).to.eql {
+          name: 'set 2'
+          intervals: [intervals: jsonIntervals]
         }
 
   describe "named set", ->
@@ -72,6 +94,19 @@ describe "Set", ->
 
       it "creates an intervalSet to replace the previous interval", ->
         expect(workoutSet.current().intervals.length).to.eq 2
+
+      describe '::toJSON', ->
+        it 'outputs correct information', ->
+          expect(workoutSet.toJSON()).to.eql {
+            name: 'set 1'
+            intervals: [
+              {
+                intervals: [
+                  new Interval().toJSON(), new Interval().toJSON()
+                ]
+              }
+            ]
+          }
 
     describe "with added intervals", ->
       beforeEach ->
