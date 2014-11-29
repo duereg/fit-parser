@@ -1,8 +1,24 @@
+moment = require 'moment'
+_ = require 'underscore'
+
 {expect} = require "./spec-helper"
 IntervalSet = require "../lib/intervalSet"
 Interval = require "../lib/interval"
-moment = require 'moment'
-_ = require 'underscore'
+timeFormatter = require '../lib/timeFormatter'
+
+oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
+
+jsonIntervals = [
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
+]
+
+intervals = [
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
+]
 
 describe "IntervalSet", ->
   {set} = {}
@@ -58,9 +74,8 @@ describe "IntervalSet", ->
 
     describe "with multiple intervals", ->
       beforeEach ->
-        set.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
-        set.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
-        set.addInterval new Interval {distance: 100, type: 'huho', time: moment.duration('00:01:30')}
+        intervals.forEach (interval) ->
+          set.addInterval interval
 
       describe "::toString", ->
         it 'displays correct set notation for all intervals', ->

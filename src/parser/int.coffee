@@ -5,7 +5,7 @@ integer =
   isNumRegEx: /^\d+$/
 
   tryParse: (str, defaultValue) ->
-    defaultValue = parseInt(str)  if @isNumber(str)
+    defaultValue = parseInt(str, 10)  if @isNumber(str)
     defaultValue
 
   isNumber: (num) ->
