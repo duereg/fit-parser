@@ -1,6 +1,6 @@
 {expect} = require "../spec-helper"
 
-tokens = require("../../lib/parser/tokens")
+tokens = require("../../lib/parser/handlers/tokens")
 
 describe "Working with the token determiner Library", ->
   describe "::isSet", ->
@@ -34,17 +34,6 @@ describe "Working with the token determiner Library", ->
 
     it "the string \"4x100\" is not a Set Divider", ->
       expect(tokens.isSetDivider("4x100")).to.eq false
-
-  describe "::isNumber", ->
-    it "the string \"12312\" is a number", ->
-      expect(tokens.isNumber("123123")).to.eq true
-
-    it "the string \"abc\" is not a number", ->
-      expect(tokens.isNumber("abc")).to.eq false
-
-  describe "::getNumber", ->
-    it "the string \"12312\" returns 12312", ->
-      expect(tokens.getNumber("12312")).to.eq 12312
 
   describe "::getRest", ->
     it "the string '+:20' returns ':20'", ->

@@ -3,7 +3,7 @@ _ = require 'underscore'
 
 Interval = require './interval'
 propertyFactory = require './propertyFactory'
-int = require './parser/int'
+int = require './parser/handlers/int'
 
 class IntervalSet
   constructor: (intervals) ->

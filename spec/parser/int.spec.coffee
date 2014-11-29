@@ -1,5 +1,5 @@
 {expect} = require "../spec-helper"
-integer = require("../../lib/parser/int")
+integer = require("../../lib/parser/handlers/int")
 
 describe "Working with the Integer Library", ->
   describe "Testing isNumber", ->

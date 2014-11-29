@@ -1,4 +1,4 @@
-tokenActions = require '../tokens'
+tokenActions = require './tokens'
 
 module.exports =
   canHandle: (token) ->

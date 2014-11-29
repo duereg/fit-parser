@@ -6,12 +6,6 @@ module.exports =
   isSetDividerRegex: /^[xX\\*]$/
   isTimeRegex: /^(([0-9])|([0-1][0-9])|([2][0-3]))?:(([0-9])|([0-5][0-9]))$/
 
-  isNumber: (str) ->
-    integer.isNumber(str)
-
-  getNumber: (str) ->
-    parseInt(str, 10)
-
   isSet: (str) ->
     @isSetRegex.test str
 
@@ -30,8 +24,8 @@ module.exports =
   getRest: (str) ->
     plusPosition = str.indexOf('+')
     justTime = str.slice(plusPosition + 1)
-    isRemainderTime = @isTimeRegex.test justTime
-    isRemainderNumber = @isNumber(justTime)
+    isRemainderTime = @isTime justTime
+    isRemainderNumber = integer.isNumber(justTime)
 
     if (plusPosition > -1)
       if isRemainderTime
