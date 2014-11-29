@@ -4,10 +4,6 @@
 integer =
   isNumRegEx: /^\d+$/
 
-  tryParse: (str, defaultValue) ->
-    defaultValue = parseInt(str, 10)  if @isNumber(str)
-    defaultValue
-
   isNumber: (num) ->
     @isNumRegEx.test num
 
