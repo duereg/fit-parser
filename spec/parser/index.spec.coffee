@@ -99,11 +99,21 @@ describe "parser", ->
     it "returns workout with set", ->
       expect(workout.sets.length).to.eq 1
 
-    it "returns workout with set and valid interval", ->
-      generatedInterval = workout.current().current()
-      expect(generatedInterval).not.to.eq null
-      expect(generatedInterval.distance).to.eq 100
-      expect(generatedInterval.type).to.eq "Swim"
+    describe 'generated interval', ->
+      generatedInterval = null
+
+      beforeEach ->
+        generatedInterval = workout.current().current()
+
+      it "has valid distance", ->
+        expect(generatedInterval.distance).to.eq 100
+
+      it 'had valid type', ->
+        expect(generatedInterval.type).to.eq "Swim"
+
+      it 'had valid time', ->
+        expect(generatedInterval.time.minutes()).to.eq 1
+        expect(generatedInterval.time.seconds()).to.eq 30
 
   describe "given interval with rest (100 Swim +30) to parse", ->
     workout = null
@@ -116,11 +126,20 @@ describe "parser", ->
     it "returns workout with set", ->
       expect(workout.sets.length).to.eq 1
 
-    it "returns workout with set and valid interval", ->
-      generatedInterval = workout.current().current()
-      expect(generatedInterval).not.to.eq null
-      expect(generatedInterval.distance).to.eq 100
-      expect(generatedInterval.type).to.eq "Swim"
+    describe 'generated interval', ->
+      generatedInterval = null
+
+      beforeEach ->
+        generatedInterval = workout.current().current()
+
+      it "has valid distance", ->
+        expect(generatedInterval.distance).to.eq 100
+
+      it 'had valid type', ->
+        expect(generatedInterval.type).to.eq "Swim"
+
+      it 'had valid time', ->
+        expect(generatedInterval.time.seconds()).to.eq 30
 
   describe "given intervalSet (4x100 Swim @ 1:30) to parse", ->
     workout = null
@@ -149,6 +168,9 @@ describe "parser", ->
 
       it "returns workout with set that has a total distance of 400", ->
         expect(generatedSet.totalDistance()).to.eq 400
+
+      it "returns workout with set that has a total time of six minutes", ->
+        expect(generatedSet.totalTime()).to.eq 6 * 60 * 1000
 
       it "returns workout with set and swim intervals", ->
         expect(generatedSet.current().type).to.eq "Swim"
