@@ -41,10 +41,10 @@ module.exports =
     isRemainderNumber = integer.isNumber(justTime)
 
     if (plusPosition > -1)
-      if isRemainderTime
-        return justTime
-      else if isRemainderNumber
+      if isRemainderNumber
         return ":#{justTime}"
+      else if isRemainderTime
+        return justTime
 
     return ''
 

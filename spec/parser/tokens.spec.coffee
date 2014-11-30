@@ -45,6 +45,12 @@ describe "Working with the token determiner Library", ->
     it "the string 'abc' returns ''", ->
       expect(tokens.getRest("abc")).to.eq ''
 
+    it "the string '+abc' returns ''", ->
+      expect(tokens.getRest("abc")).to.eq ''
+
+    it "the string +20 returns ':20'", ->
+      expect(tokens.getRest("+20")).to.eq ':20'
+
   describe "::getDuration", ->
     it "the string ':20' returns a 20 second duration", ->
       expect(tokens.getDuration(":20").seconds()).to.eq 20
