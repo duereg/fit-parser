@@ -26,7 +26,7 @@ gulp.task 'test', ['coffee', 'lint'], ->
     .pipe istanbul({includeUntested: true}) # Covering files
     .on 'finish', ->
       gulp.src ['spec/**/*.spec.coffee']
-        .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script'
+        .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script/register'
         .pipe istanbul.writeReports() # Creating the reports after tests run
 
 gulp.task 'default', ['clean', 'coffee']
