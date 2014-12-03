@@ -21,9 +21,6 @@ gulp.task 'lint', ->
     .pipe coffeelint()
     .pipe coffeelint.reporter()
 
-istanbul = require 'gulp-istanbul'
-mocha = require 'gulp-mocha'
-
 gulp.task 'test', ['coffee', 'lint'], ->
   gulp.src ['lib/**/*.js']
     .pipe istanbul({includeUntested: true}) # Covering files
