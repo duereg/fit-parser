@@ -21,9 +21,12 @@ gulp.task 'lint', ->
     .pipe coffeelint()
     .pipe coffeelint.reporter()
 
+istanbul = require 'gulp-istanbul'
+mocha = require 'gulp-mocha'
+
 gulp.task 'test', ['coffee', 'lint'], ->
   gulp.src ['lib/**/*.js']
-    .pipe istanbul() # Covering files
+    .pipe istanbul({includeUntested: true}) # Covering files
     .on 'finish', ->
       gulp.src ['spec/**/*.spec.coffee']
         .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script'
