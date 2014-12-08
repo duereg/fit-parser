@@ -72,7 +72,7 @@ describe 'timeFormatter', ->
         expect(timeFormatter.toJSON(fiveMinutes)).to.eql _(timeFormatter.noTime).clone()
 
   describe '::toString', ->
-    {fiveMinutes, fiveHours} = {}
+    {fiveMinutes, fiveHours, oneHourFiveMinutes} = {}
 
     describe 'given a number of milliseconds', ->
       beforeEach ->
@@ -97,10 +97,17 @@ describe 'timeFormatter', ->
           expect(timeFormatter.toString(fiveHours)).to.eq '5:00:00'
 
     describe 'given a duration', ->
-      beforeEach ->
-        fiveMinutes = moment.duration minutes: 5
+      describe 'in minutes', ->
+        beforeEach ->
+          fiveMinutes = moment.duration minutes: 5
 
-      it 'returns a valid representation', ->
-        expect(timeFormatter.toString(fiveMinutes)).to.eq '5:00'
+        it 'returns a valid representation', ->
+          expect(timeFormatter.toString(fiveMinutes)).to.eq '5:00'
+      describe 'in hours and minutes', ->
+        beforeEach ->
+          oneHourFiveMinutes = moment.duration minutes: 5, hours: 1
+
+        it 'returns a valid representation', ->
+          expect(timeFormatter.toString(oneHourFiveMinutes)).to.eq '1:05:00'
 
 

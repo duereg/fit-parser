@@ -23,13 +23,13 @@ toString = (time) ->
   if time.hours()
     format += time.hours() + ':'
 
-  if time.minutes() is 0 and time.hours()
-    format += '00:'
+  if time.minutes() < 10 and time.hours()
+    format += "0#{time.minutes()}:"
   else
-    format += time.minutes() + ':'
+    format += "#{time.minutes()}:"
 
-  if time.seconds() is 0
-    format += '00'
+  if time.seconds() < 10
+    format += "0#{time.seconds()}"
   else
     format += time.seconds()
 
