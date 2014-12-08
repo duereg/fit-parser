@@ -14,7 +14,7 @@ class IntervalSet
     propertyFactory(this, @intervals, 'time')
     propertyFactory(this, @intervals, 'rest')
 
-    if intervals
+    if intervals?
       if int.isNumber intervals
         i = 0
         while i < intervals
@@ -22,7 +22,8 @@ class IntervalSet
           i++
 
       if _(intervals).isArray()
-        @intervals = intervals.map (interval) -> new Interval(interval)
+        intervals.map (interval) =>
+          @intervals.push new Interval(interval)
 
   isEmpty: ->
     @intervals.length is 0

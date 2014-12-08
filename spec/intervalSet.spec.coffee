@@ -42,6 +42,10 @@ describe "IntervalSet", ->
           intervals: jsonIntervals
         }
 
+    describe '::time', ->
+      it 'returns summed milliseconds from the intervals', ->
+        expect(set.time).to.eq 270000
+
   describe "Creating an empty set", ->
     beforeEach ->
       set = new IntervalSet()
