@@ -24,14 +24,12 @@ toString = (time) ->
     format += time.hours() + ':'
 
   if time.minutes() < 10 and time.hours()
-    format += "0#{time.minutes()}:"
-  else
-    format += "#{time.minutes()}:"
+    format += '0'
+  format += "#{time.minutes()}:"
 
   if time.seconds() < 10
-    format += "0#{time.seconds()}"
-  else
-    format += time.seconds()
+    format += '0'
+  format += time.seconds()
 
   format
 
