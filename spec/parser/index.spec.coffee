@@ -152,6 +152,9 @@ describe "parser", ->
     it "returns workout with set", ->
       expect(workout.sets.length).to.eq 1
 
+    it 'returns valid time', ->
+      expect(workout.totalTime()).to.eq 360000
+
     describe "when looking at the current set", ->
       generatedSet = null
       beforeEach ->

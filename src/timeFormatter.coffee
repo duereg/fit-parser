@@ -36,8 +36,14 @@ toString = (time) ->
   format
 
 toJSON = (time) ->
+  retValue = _(noTime).clone()
+
   #if time is number, set milliseconds?
-  if time?._data? then time._data else _(noTime).clone()
+  if time?._data?
+    retValue = time._data
+
+  retValue
+
 
 
 module.exports = {isEmpty, toString, toJSON, toDuration, noTime}
