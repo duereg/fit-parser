@@ -47,6 +47,22 @@ describe 'timeFormatter', ->
       it 'returns a valid representation', ->
         expect(timeFormatter.toDuration(fiveMinutes)).to.eql moment.duration minutes: 5
 
+    describe "given a string", ->
+      it "':20' returns a 20 second duration", ->
+        expect(timeFormatter.toDuration(":20").seconds()).to.eq 20
+
+      it "'20' returns a 20 second duration", ->
+        expect(timeFormatter.toDuration("20").seconds()).to.eq 20
+
+      it "'1:15' returns a 1 minute 15 second duration", ->
+        expect(timeFormatter.toDuration("1:15").minutes()).to.eq 1
+        expect(timeFormatter.toDuration("1:15").seconds()).to.eq 15
+
+      it "'1:25:45' returns a 1 hour, 25 minute, 45 second duration", ->
+        expect(timeFormatter.toDuration("1:25:45").hours()).to.eq 1
+        expect(timeFormatter.toDuration("1:25:45").minutes()).to.eq 25
+        expect(timeFormatter.toDuration("1:25:45").seconds()).to.eq 45
+
   describe '::toJSON', ->
     {fiveMinutes} = {}
 

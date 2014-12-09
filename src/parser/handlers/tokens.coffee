@@ -22,18 +22,6 @@ module.exports =
   isRest: (str) ->
     @getRest(str).length > 0
 
-  getDuration: (str) ->
-    timeTokens = str.split(':')
-    timeTypes = ['hours', 'minutes', 'seconds']
-    duration = {}
-
-    while timeTokens.length
-      token = timeTokens.pop()
-      type = timeTypes.pop()
-      duration[type] = parseInt token, 10
-
-    moment.duration duration
-
   getRest: (str) ->
     plusPosition = str.indexOf('+')
     justTime = str.slice(plusPosition + 1)

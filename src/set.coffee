@@ -1,6 +1,7 @@
 Interval = require('./interval')
 IntervalSet = require('./intervalSet')
 actions = require('./actions')
+timeFormatter = require('./timeFormatter')
 
 class Set
   constructor: (options) ->
@@ -51,7 +52,7 @@ class Set
     @current().distance = distance
 
   setTime: (time) ->
-    @current().time = time
+    @current().time = timeFormatter.toDuration time
 
   setType: (type) ->
     @current().type = type

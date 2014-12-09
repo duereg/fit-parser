@@ -51,22 +51,6 @@ describe "Working with the token determiner Library", ->
     it "the string +20 returns ':20'", ->
       expect(tokens.getRest("+20")).to.eq ':20'
 
-  describe "::getDuration", ->
-    it "the string ':20' returns a 20 second duration", ->
-      expect(tokens.getDuration(":20").seconds()).to.eq 20
-
-    it "the string '20' returns a 20 second duration", ->
-      expect(tokens.getDuration("20").seconds()).to.eq 20
-
-    it "the string '1:15' returns a 1 minute 15 second duration", ->
-      expect(tokens.getDuration("1:15").minutes()).to.eq 1
-      expect(tokens.getDuration("1:15").seconds()).to.eq 15
-
-    it "the string '1:25:45' returns a 1 hour, 25 minute, 45 second duration", ->
-      expect(tokens.getDuration("1:25:45").hours()).to.eq 1
-      expect(tokens.getDuration("1:25:45").minutes()).to.eq 25
-      expect(tokens.getDuration("1:25:45").seconds()).to.eq 45
-
   describe "::isRest", ->
     it "the string \"+:20\" is a rest period", ->
       expect(tokens.isRest("+:20")).to.eq true

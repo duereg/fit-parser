@@ -1,4 +1,5 @@
 tokenActions = require './tokens'
+timeFormatter = require '../../timeFormatter'
 
 module.exports =
   canHandle: (token) ->
@@ -6,4 +7,4 @@ module.exports =
 
   act: (tokens, token, currentSet) ->
     rest = tokenActions.getRest token
-    currentSet.setRest tokenActions.getDuration rest
+    currentSet.setRest timeFormatter.toDuration rest

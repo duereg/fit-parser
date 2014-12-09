@@ -1,6 +1,8 @@
+duration = require('moment').duration
+
 Set = require "../lib/set"
 Interval = require "../lib/interval"
-{expect, intervals, jsonIntervals} = require "./spec-helper"
+{expect, intervals, jsonIntervals, oneMinuteThirty} = require "./spec-helper"
 
 describe "Set", ->
   {workoutSet} = {}
@@ -76,6 +78,13 @@ describe "Set", ->
 
       it 'creates a valid interval', ->
         expect(interval).to.be.ok
+
+      describe '::setTime(string)', ->
+        beforeEach ->
+          workoutSet.setTime '1:30'
+
+        it 'parses time correctly and sets a duration', ->
+          expect(workoutSet.current().time).to.eql duration oneMinuteThirty
 
     describe "::addInterval", ->
       it "calling with null throws", ->

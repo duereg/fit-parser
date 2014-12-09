@@ -6,7 +6,21 @@ noTime = { milliseconds: 0, seconds: 0, minutes: 0, hours: 0, days: 0, months: 0
 isEmpty = (time) ->
   not time._milliseconds > 0
 
+getDurationFromString = (str) ->
+  timeTokens = str.split(':')
+  timeTypes = ['hours', 'minutes', 'seconds']
+  duration = {}
+
+  while timeTokens.length
+    token = timeTokens.pop()
+    type = timeTypes.pop()
+    duration[type] = parseInt token, 10
+
+  moment.duration duration
+
 toDuration = (time) ->
+  if _(time).isString()
+    time = getDurationFromString(time)
   if (_(time).isObject() or _(time).isNumber()) and not _(time.hours).isFunction()
     time = moment.duration(time)
   if _(time).isNull() or _(time).isUndefined()
@@ -41,7 +55,5 @@ toJSON = (time) ->
     retValue = time._data
 
   retValue
-
-
 
 module.exports = {isEmpty, toString, toJSON, toDuration, noTime}

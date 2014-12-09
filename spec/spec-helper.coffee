@@ -24,4 +24,4 @@ intervals = [
 ]
 
 
-module.exports = {expect: chai.expect, sinon, chai, jsonIntervals, intervals}
+module.exports = {expect: chai.expect, sinon, chai, jsonIntervals, intervals, oneMinuteThirty}
