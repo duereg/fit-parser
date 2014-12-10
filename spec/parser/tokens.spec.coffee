@@ -75,6 +75,12 @@ describe "Working with the token determiner Library", ->
       expect(tokens.isTimeDivider("abc")).to.eq false
 
   describe "::isTime", ->
+    it 'the string "1:00:00" is a Time', ->
+      expect(tokens.isTime("1:00:00")).to.eq true
+
+    it 'the string "2:00:00" is a Time', ->
+      expect(tokens.isTime("2:00:00")).to.eq true
+
     it "the string \"1:30\" is a Time", ->
       expect(tokens.isTime("1:30")).to.eq true
 
