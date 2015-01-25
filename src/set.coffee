@@ -16,7 +16,7 @@ class Set
     {@name, intervals: @intervals.map (interval) -> interval.toJSON()}
 
   add: ->
-    throw new Error("Must implement")
+    throw new Error('Must implement')
 
   current: ->
     currentInterval = null
