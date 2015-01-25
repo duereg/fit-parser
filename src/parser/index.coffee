@@ -17,7 +17,6 @@ parseLine = (lines, work) ->
     processTokens tokens, work if notAllEmpty
   return
 
-#TODO: Break into chain of responsibility
 processTokens = (tokens, work) ->
   numStartTokens = tokens.length
   currentSet = work.current()
