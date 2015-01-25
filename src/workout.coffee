@@ -9,7 +9,11 @@ class Workout
   constructor: (options) ->
     {@sets} = options if options?
     @sets ?= []
-    @sets = @sets.map (set) -> new TimedSet(set)
+    @sets = @sets.map (set) ->
+      if isWeightSet(set.name)
+        new WeightSet set
+      else
+        new TimedSet set
 
   toString: ->
     @sets.map((set) -> set.toString()).join('\n')

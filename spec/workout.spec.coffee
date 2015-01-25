@@ -1,4 +1,4 @@
-{expect, jsonIntervals} = require './spec-helper'
+{expect, jsonIntervals, weightWorkout} = require './spec-helper'
 moment = require 'moment'
 _ = require 'underscore'
 
@@ -29,7 +29,26 @@ describe 'Workout', ->
     it 'the string that contains a single "*" is not a weight set regex', ->
       expect(Workout.isWeightSet('4*100 @ 1:30')).to.eq false
 
-  describe 'given sets', ->
+  describe 'given weight sets', ->
+    beforeEach ->
+      workout = new Workout weightWorkout
+
+    it 'contains the correct number of sets', ->
+      expect(workout.sets.length).to.eq 6
+      console.log JSON.stringify workout.toJSON()
+
+    it "the sets are named correctly", ->
+      expect(workout.sets[0].name).to.eq '** Flat Barbell Bench Press **'
+      expect(workout.sets[1].name).to.eq '** Decline cable flies **'
+      expect(workout.sets[2].name).to.eq '** Dead Bug 3 **'
+      expect(workout.sets[3].name).to.eq '** Dead Bug 4 **'
+      expect(workout.sets[4].name).to.eq '** Rope Beaters **'
+      expect(workout.sets[5].name).to.eq '** Running (Treadmill) **'
+
+    it 'generates the correct number of intervals', ->
+      expect(workout.totalIntervals()).to.eq 16
+
+  describe 'given timed sets', ->
     beforeEach ->
       workout = new Workout {sets: [{name: 'set 1', intervals: jsonIntervals}]}
 

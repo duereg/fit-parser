@@ -1,4 +1,5 @@
 Weight = require('./weight')
+Interval = require('./interval')
 Set = require('./set')
 actions = require('./actions')
 
@@ -6,7 +7,11 @@ class WeightSet extends Set
   constructor: (options) ->
     #this isn't the right way to do this
     _super.call(this, options)
-    @intervals = @intervals.map (interval) -> new Weight(interval)
+    @intervals = @intervals.map (interval) ->
+      if (interval.reps) #always will have reps
+        new Weight(interval)
+      else
+        new Interval(interval)
 
   add: (weightToAdd) ->
     throw new Error('Invalid weight given')  if weightToAdd is null
