@@ -14,6 +14,6 @@ module.exports =
     unless workout.current() instanceof WeightSet
       workout.sets.pop() #remove created set
     else
-      workout.current().intervals.pop() #???
+      workout.current().intervals.pop()
 
     currentSet = workout.addSet(name) #recreate as correct type
