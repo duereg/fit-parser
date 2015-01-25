@@ -19,6 +19,7 @@ parseLine = (lines, work) ->
 
 processTokens = (tokens, work) ->
   numStartTokens = tokens.length
+
   currentSet = work.current()
   currentSet.add()
 

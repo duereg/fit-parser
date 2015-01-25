@@ -41,6 +41,36 @@ Workout
 2:00 Rest
 20:00 Swim """
 
+weightExample = """
+** Flat Barbell Bench Press **
+- 95.0 lbs x 10 reps
+- 135.0 lbs x 10 reps
+- 135.0 lbs x 10 reps
+- 145.0 lbs x 10 reps
+- 155.0 lbs x 6 reps
+- 155.0 lbs x 5 reps
+
+** Decline cable flies **
+- 30.0 lbs x 10 reps
+- 35.0 lbs x 10 reps
+- 40.0 lbs x 10 reps
+
+** Dead Bug 3 **
+- 20 reps
+- 20 reps
+
+** Dead Bug 4 **
+- 20 reps
+- 20 reps
+"""
+
+weightWithCardio = weightExample + """
+
+** Rope Beaters **
+- 00:30
+- 00:30
+"""
+
 set = "Start"
 
 interval = "100 Swim  @   30"
@@ -50,12 +80,12 @@ intervalSet = "4x100  Swim @ 1:30"
 intervalWithRest = "100 Swim +30"
 
 describe "parser", ->
+  {workout} = {}
 
   it "given null to parse, throws", ->
     expect(() -> parse(null)).to.throw "You must provide a valid string to parse to continue."
 
   describe "Given a full example to parse", ->
-    {workout} = {}
 
     beforeEach ->
       workout = parse(fullExample)
@@ -68,35 +98,43 @@ describe "parser", ->
       expect(workout.sets[1].name).to.eq "Workout"
       expect(workout.sets[2].name).to.eq "Cooling down now"
 
+  describe 'given a weight set to parse', ->
+    beforeEach ->
+      workout = parse(weightExample)
+
+    it "returns a workout", ->
+      expect(workout).not.to.eq null
+
+    it "returns a workout with a set", ->
+      expect(workout.sets.length).to.eq 4
+
   describe "given a Set Name to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(set)
 
-    it "returns workout", ->
+    it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns workout with set", ->
+    it "returns a workout with a set", ->
       expect(workout.sets.length).to.eq 1
 
-    it "returns workout with correct set name", ->
+    it "returns a workout with correct set name", ->
       expect(workout.current().name).to.eq set
 
-    it "returns workout with distance of 0", ->
+    it "returns a workout with distance of 0", ->
       expect(workout.current().totalDistance()).to.eq 0
 
-    it "returns workout with time of 0", ->
+    it "returns a workout with time of 0", ->
       expect(workout.current().totalTime()).to.eq 0
 
   describe "given interval with time (100 Swim @ :30) to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(interval)
 
-    it "returns workout", ->
+    it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns workout with set", ->
+    it "returns a workout with a set", ->
       expect(workout.sets.length).to.eq 1
 
     describe 'generated interval', ->
@@ -116,14 +154,13 @@ describe "parser", ->
         expect(generatedInterval.time.seconds()).to.eq 30
 
   describe "given interval with rest (100 Swim +30) to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(intervalWithRest)
 
-    it "returns workout", ->
+    it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns workout with set", ->
+    it "returns a workout with a set", ->
       expect(workout.sets.length).to.eq 1
 
     describe 'generated interval', ->
@@ -142,14 +179,13 @@ describe "parser", ->
         expect(generatedInterval.rest.seconds()).to.eq 30
 
   describe "given intervalSet (4x100 Swim @ 1:30) to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(intervalSet)
 
-    it "returns workout", ->
+    it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns workout with set", ->
+    it "returns a workout with a set", ->
       expect(workout.sets.length).to.eq 1
 
     it 'returns valid time', ->
@@ -166,38 +202,36 @@ describe "parser", ->
       it "creates valid intervals", ->
         expect(generatedSet.intervals).not.to.eq null
 
-      it "returns workout with set and 4 intervals", ->
+      it "returns a workout with a set and 4 intervals", ->
         expect(generatedSet.current().intervals.length).to.eq 4
 
-      it "returns workout with set that has a total distance of 400", ->
+      it "returns a workout with a set that has a total distance of 400", ->
         expect(generatedSet.totalDistance()).to.eq 400
 
-      it "returns workout with set that has a total time of six minutes", ->
+      it "returns a workout with a set that has a total time of six minutes", ->
         expect(generatedSet.totalTime()).to.eq 6 * 60 * 1000
 
-      it "returns workout with set and swim intervals", ->
+      it "returns a workout with a set and swim intervals", ->
         expect(generatedSet.current().type).to.eq "Swim"
 
   describe "given full set to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(fullSet)
 
-    it "returns workout", ->
+    it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns workout with 1 set", ->
+    it "returns a workout with 1 set", ->
       expect(workout.sets.length).to.eq 1
 
-    it "returns workout with set named \"Workout\"", ->
+    it "returns a workout with a set named \"Workout\"", ->
       expect(workout.current().name).to.eq "Workout"
 
-    it "returns workout with 7 intervals", ->
+    it "returns a workout with 7 intervals", ->
       generatedSet = workout.current()
       expect(generatedSet.totalIntervals()).to.eq 7
 
   describe "given two sets to parse", ->
-    workout = null
     beforeEach ->
       workout = parse(twoSets)
 
@@ -216,7 +250,8 @@ describe "parser", ->
         expect(moment.duration(workout.totalTime()).humanize()).to.eq "40 minutes"
 
     describe "the first set", ->
-      warmUp = null
+      {warmUp} = {}
+
       beforeEach ->
         warmUp = workout.sets[0]
 
