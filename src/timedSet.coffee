@@ -1,42 +1,25 @@
 Interval = require('./interval')
 IntervalSet = require('./intervalSet')
+Set = require('./set')
 actions = require('./actions')
 timeFormatter = require('./timeFormatter')
 
-class Set
+class TimedSet extends Set
   constructor: (options) ->
-    {@name, @intervals} = options if options?
-    @intervals ?= []
-    @name ?= ''
+    #this isn't the right way to do this
+    _super.call(this, options)
+
     @intervals = @intervals.map (interval) ->
       if interval.intervals
         new IntervalSet(interval.intervals)
       else
         new Interval(interval)
 
-  toString: ->
-    output = ''
-    output += @name + '\n' if @name.length
-    output += @intervals.map((interval) -> interval.toString()).join('\n')
-    output
-
-  toJSON: ->
-    {@name, intervals: @intervals.map (interval) -> interval.toJSON()}
-
   addInterval: (intervalToAdd) ->
     throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval()  unless intervalToAdd?
     @intervals.push intervalToAdd
     intervalToAdd
-
-  current: ->
-    currentInterval = null
-    intervalLength = @intervals.length
-    if intervalLength > 0
-      currentInterval = @intervals[intervalLength - 1]
-    else
-      currentInterval = @addInterval()
-    currentInterval
 
   changeToMulti: ->
     numIntervals = @current().distance
@@ -63,15 +46,4 @@ class Set
   totalTime: ->
     actions.sum @intervals, 'time'
 
-  totalIntervals: ->
-    total = 0
-
-    for interval in @intervals
-      if interval?.intervals
-        total += interval.intervals.length
-      else
-        total += 1
-
-    total
-
-module.exports = Set
+module.exports = TimedSet
