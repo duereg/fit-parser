@@ -69,6 +69,9 @@ weightWithCardio = weightExample + """
 ** Rope Beaters **
 - 00:30
 - 00:30
+
+** Running (Treadmill) **
+- 2.03 mi in 20:00
 """
 
 set = "Start"
@@ -116,6 +119,23 @@ describe "parser", ->
 
     it 'generates the correct number of intervals', ->
       expect(workout.totalIntervals()).to.eq 13
+
+  describe 'given a weight set with cardio to parse', ->
+    beforeEach ->
+      workout = parse(weightWithCardio)
+
+    it "returns a workout", ->
+      expect(workout).not.to.eq null
+
+    it "returns a workout with 6 sets", ->
+      expect(workout.sets.length).to.eq
+
+    it "the 5th and 6th sets are named correctly", ->
+      expect(workout.sets[4].name).to.eq '** Rope Beaters **'
+      expect(workout.sets[5].name).to.eq '** Running (Treadmill) **'
+
+    it 'generates the correct number of intervals', ->
+      expect(workout.totalIntervals()).to.eq 16
 
   describe "given a Set Name to parse", ->
     beforeEach ->
