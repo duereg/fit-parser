@@ -3,8 +3,6 @@ moment = require 'moment'
 _ = require 'underscore'
 
 Workout = require '../lib/workout'
-Set = require '../lib/set'
-Interval = require '../lib/set'
 timeFormatter = require '../lib/timeFormatter'
 
 longSwim = {

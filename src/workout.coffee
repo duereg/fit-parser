@@ -1,11 +1,11 @@
-Set = require('./set')
+TimedSet = require('./timedSet')
 actions = require('./actions')
 
 class Workout
   constructor: (options) ->
     {@sets} = options if options?
     @sets ?= []
-    @sets = @sets.map (set) -> new Set(set)
+    @sets = @sets.map (set) -> new TimedSet(set)
 
   toString: ->
     @sets.map((set) -> set.toString()).join('\n')
@@ -14,7 +14,7 @@ class Workout
     {sets: @sets.map (set) -> set.toJSON() }
 
   addSet: (setName) ->
-    newSet = new Set {name: setName}
+    newSet = new TimedSet {name: setName}
     @sets.push newSet
     newSet
 
