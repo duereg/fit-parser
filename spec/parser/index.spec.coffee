@@ -105,8 +105,17 @@ describe "parser", ->
     it "returns a workout", ->
       expect(workout).not.to.eq null
 
-    it "returns a workout with a set", ->
+    it "returns a workout with 4 sets", ->
       expect(workout.sets.length).to.eq 4
+
+    it "the sets are named correctly", ->
+      expect(workout.sets[0].name).to.eq '** Flat Barbell Bench Press **'
+      expect(workout.sets[1].name).to.eq '** Decline cable flies **'
+      expect(workout.sets[2].name).to.eq '** Dead Bug 3 **'
+      expect(workout.sets[3].name).to.eq '** Dead Bug 4 **'
+
+    it 'generates the correct number of intervals', ->
+      expect(workout.totalIntervals()).to.eq 13
 
   describe "given a Set Name to parse", ->
     beforeEach ->

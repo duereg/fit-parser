@@ -17,14 +17,32 @@ describe 'weightTitle Handler', ->
   describe '::act', ->
     {workout} = {}
 
-    beforeEach ->
-      workout = new Workout()
-      currentSet = workout.current()
-      currentSet.add()
-      weightTitle.act ['Bench', 'Press', '**'], '**', currentSet, workout
+    describe 'first pass', ->
+      beforeEach ->
+        workout = new Workout()
+        currentSet = workout.current()
+        currentSet.add()
+        weightTitle.act ['Bench', 'Press', '**'], '**', currentSet, workout
 
-    it 'the workout`s current set has the correct name', ->
-      expect(workout.current().name).to.eq '** Bench Press **'
+      it 'there should be only one set', ->
+        expect(workout.sets.length).to.eq 1
 
-    it 'the current set is of the correct type', ->
-      expect(workout.current()).to.be.instanceOf WeightSet
+      it 'the workout`s current set has the correct name', ->
+        expect(workout.current().name).to.eq '** Bench Press **'
+
+      it 'the current set is of the correct type', ->
+        expect(workout.current()).to.be.instanceOf WeightSet
+
+      describe 'second pass', ->
+        beforeEach ->
+          currentSet = workout.current()
+          weightTitle.act ['Squat', 'Thrusts', '**'], '**', currentSet, workout
+
+        it 'should create a second set', ->
+          expect(workout.sets.length).to.eq 2
+
+        it 'the workout`s current set has the correct name', ->
+          expect(workout.current().name).to.eq '** Squat Thrusts **'
+
+        it 'the current set is of the correct type', ->
+          expect(workout.current()).to.be.instanceOf WeightSet

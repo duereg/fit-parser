@@ -22,14 +22,28 @@ describe 'weightInterval Handler', ->
         expect(weightInterval.canHandle('-', currentSet)).to.eq true
 
   describe '::act', ->
-    beforeEach ->
-      weightInterval.act ['95.0', 'lbs', 'x', '10', 'reps'], '-', currentSet, workout
+    describe 'on a line where both weight and reps are defined', ->
+      beforeEach ->
+        weightInterval.act ['95.0', 'lbs', 'x', '10', 'reps'], '-', currentSet, workout
 
-    it 'the weight is correct', ->
-      expect(currentSet.current().weight).to.eq 95
+      it 'the weight is correct', ->
+        expect(currentSet.current().weight).to.eq 95
 
-    it 'the reps are correct', ->
-      expect(currentSet.current().reps).to.eq 10
+      it 'the reps are correct', ->
+        expect(currentSet.current().reps).to.eq 10
 
-    it 'the interval is instanceOf of the Weight class', ->
-      expect(currentSet.current()).to.be.instanceOf Weight
+      it 'the interval is instanceOf of the Weight class', ->
+        expect(currentSet.current()).to.be.instanceOf Weight
+
+    describe 'on a line where only the reps are set', ->
+      beforeEach ->
+        weightInterval.act ['10', 'reps'], '-', currentSet, workout
+
+      it 'no weight is set', ->
+        expect(currentSet.current().weight).to.not.be.ok
+
+      it 'the reps are correct', ->
+        expect(currentSet.current().reps).to.eq 10
+
+      it 'the interval is instanceOf of the Weight class', ->
+        expect(currentSet.current()).to.be.instanceOf Weight

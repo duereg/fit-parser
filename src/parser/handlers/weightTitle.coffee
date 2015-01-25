@@ -1,4 +1,5 @@
 Workout = require '../../workout'
+WeightSet = require '../../weightSet'
 
 module.exports =
   canHandle: (token) ->
@@ -10,5 +11,9 @@ module.exports =
     name = tokens.join(' ') #generate name from all strings
     tokens.length = 0 #empty tokens - we're done
 
-    workout.sets.pop() #remove created set
+    unless workout.current() instanceof WeightSet
+      workout.sets.pop() #remove created set
+    else
+      workout.current().intervals.pop() #???
+
     currentSet = workout.addSet(name) #recreate as correct type
