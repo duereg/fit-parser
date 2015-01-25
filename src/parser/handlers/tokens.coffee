@@ -7,9 +7,6 @@ module.exports =
   isSetDividerRegex: /^[xX\\*]$/
   isTimeRegex: /^(([0-9])|([0-9][0-9]))?:?(([0-9])|([0-9][0-9]))?:?(([0-9])|([0-5][0-9]))$/
 
-  isWeightSet: (str) ->
-    !!str && str.indexOf('**') is 0 && str.lastIndexOf('**') is str.length - 2
-
   isSet: (str) ->
     @isSetRegex.test str
 

@@ -1,5 +1,9 @@
 TimedSet = require('./timedSet')
+WeightSet = require('./weightSet')
 actions = require('./actions')
+
+isWeightSet = (str) ->
+  !!str && str.indexOf('**') is 0 && str.lastIndexOf('**') is str.length - 2
 
 class Workout
   constructor: (options) ->
@@ -14,7 +18,11 @@ class Workout
     {sets: @sets.map (set) -> set.toJSON() }
 
   addSet: (setName) ->
-    newSet = new TimedSet {name: setName}
+    if isWeightSet(setName)
+      newSet = new WeightSet {name: setName}
+    else
+      newSet = new TimedSet {name: setName}
+
     @sets.push newSet
     newSet
 
@@ -39,5 +47,7 @@ class Workout
     total = 0
     total += set.totalIntervals() for set in @sets
     total
+
+Workout.isWeightSet = isWeightSet
 
 module.exports = Workout

@@ -16,13 +16,20 @@ shortOuo = {
   distance: 75
   rest: timeFormatter.noTime
   time: _({minutes: 1, seconds: 10}).defaults(timeFormatter.noTime)
-  type: "ouou"
+  type: 'ouou'
 }
 
 describe 'Workout', ->
   {workout, set1} = {}
 
-  describe "given sets", ->
+  describe '::isWeightSet', ->
+    it 'the string that is bracketed with "**" is a weight set regex', ->
+      expect(Workout.isWeightSet('** Squats **')).to.eq true
+
+    it 'the string that contains a single "*" is not a weight set regex', ->
+      expect(Workout.isWeightSet('4*100 @ 1:30')).to.eq false
+
+  describe 'given sets', ->
     beforeEach ->
       workout = new Workout {sets: [{name: 'set 1', intervals: jsonIntervals}]}
 
@@ -44,53 +51,72 @@ describe 'Workout', ->
             intervals: jsonIntervals
           }]
 
-  describe "sets added after creation", ->
-    beforeEach ->
-      workout = new Workout()
-      set1 = workout.addSet("set 1")
-      set1.current().distance = 1000
-      set1.current().type = 'swim'
-      set1.current().time = moment.duration("00:20:00")
-
-    it 'contains the correct number of sets', ->
-      expect(workout.sets.length).to.eq 1
-
-    it 'contains the correct number of intervals', ->
-      expect(workout.current().intervals.length).to.eq 1
-      expect(workout.totalIntervals()).to.eq 1
-
-    it 'formats correctly', ->
-      expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00'
-
-    describe "adding an interval set", ->
+  describe 'adding weight sets', ->
+    describe 'sets added after creation', ->
       beforeEach ->
-        workout.current().add()
-        workout.current().setDistance(4)
-        workout.current().changeToMulti()
-        workout.current().setDistance(75)
-        workout.current().setTime(moment.duration("00:01:10"))
-        workout.current().setType('ouou')
+        workout = new Workout()
+        set1 = workout.addSet('** Bench Press **')
+        set1.current().weight = 135
+        set1.current().reps = 10
 
-      describe '::toJSON', ->
-        it 'outputs correctly', ->
-          expect(workout.toJSON()).to.eql
-            sets: [{
-              name: 'set 1',
-              intervals: [
-                longSwim,
+      it 'contains the correct number of exercises', ->
+        expect(workout.sets.length).to.eq 1
+
+      it 'contains the correct number of sets', ->
+        expect(workout.current().intervals.length).to.eq 1
+        expect(workout.totalIntervals()).to.eq 1
+
+      it 'formats correctly', ->
+        expect(workout.toString()).to.eq '** Bench Press **\n- 135 lbs x 10 reps'
+
+  describe 'adding timed sets', ->
+    describe 'sets added after creation', ->
+      beforeEach ->
+        workout = new Workout()
+        set1 = workout.addSet('set 1')
+        set1.current().distance = 1000
+        set1.current().type = 'swim'
+        set1.current().time = moment.duration('00:20:00')
+
+      it 'contains the correct number of sets', ->
+        expect(workout.sets.length).to.eq 1
+
+      it 'contains the correct number of intervals', ->
+        expect(workout.current().intervals.length).to.eq 1
+        expect(workout.totalIntervals()).to.eq 1
+
+      it 'formats correctly', ->
+        expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00'
+
+      describe 'adding an interval set', ->
+        beforeEach ->
+          workout.current().add()
+          workout.current().setDistance(4)
+          workout.current().changeToMulti()
+          workout.current().setDistance(75)
+          workout.current().setTime(moment.duration('00:01:10'))
+          workout.current().setType('ouou')
+
+        describe '::toJSON', ->
+          it 'outputs correctly', ->
+            expect(workout.toJSON()).to.eql
+              sets: [{
+                name: 'set 1',
                 intervals: [
-                  shortOuo, shortOuo, shortOuo, shortOuo
+                  longSwim,
+                  intervals: [
+                    shortOuo, shortOuo, shortOuo, shortOuo
+                  ]
                 ]
-              ]
-            }]
+              }]
 
-      describe "1 set, containing an intervalSet", ->
-        it 'contains the correct number of sets', ->
-          expect(workout.sets.length).to.eq 1
+        describe '1 set, containing an intervalSet', ->
+          it 'contains the correct number of sets', ->
+            expect(workout.sets.length).to.eq 1
 
-        it 'contains the correct number of intervals', ->
-          expect(workout.current().intervals.length).to.eq 2
-          expect(workout.totalIntervals()).to.eq 5
+          it 'contains the correct number of intervals', ->
+            expect(workout.current().intervals.length).to.eq 2
+            expect(workout.totalIntervals()).to.eq 5
 
-        it 'formats correctly', ->
-          expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00\n4x75 ouou @ 1:10'
+          it 'formats correctly', ->
+            expect(workout.toString()).to.eq 'set 1\n1000 swim @ 20:00\n4x75 ouou @ 1:10'

@@ -74,13 +74,6 @@ describe 'Working with the token determiner Library', ->
     it 'the string "abc" is not a Time Divider', ->
       expect(tokens.isTimeDivider('abc')).to.eq false
 
-  describe '::isWeightSet', ->
-    it 'the string that is bracketed with "**" is a weight set regex', ->
-      expect(tokens.isWeightSet('** Squats **')).to.eq true
-
-    it 'the string that contains a single "*" is not a weight set regex', ->
-      expect(tokens.isWeightSet('4*100 @ 1:30')).to.eq false
-
   describe '::isTime', ->
     it 'the string "1:00:00" is a Time', ->
       expect(tokens.isTime('1:00:00')).to.eq true
