@@ -17,7 +17,7 @@ describe 'Weight', ->
       tenReps.reps = 20
 
     it 'formats correctly', ->
-      expect(tenReps.toString()).to.eq '20 reps'
+      expect(tenReps.toString()).to.eq '- 20 reps'
 
   describe 'w/ weight ::toString', ->
     beforeEach ->
@@ -25,7 +25,7 @@ describe 'Weight', ->
       tenReps.reps = 10
 
     it 'with time not set, formats correctly', ->
-      expect(tenReps.toString()).to.eq '135 lbs x 10 reps'
+      expect(tenReps.toString()).to.eq '- 135 lbs x 10 reps'
 
     describe '::toJSON', ->
       {json} = {}
@@ -44,4 +44,4 @@ describe 'Weight', ->
           newWeight = new Weight json
 
         it 'outputs the same as the original', ->
-          expect(newWeight.toString()).to.eq '135 lbs x 10 reps'
+          expect(newWeight.toString()).to.eq '- 135 lbs x 10 reps'

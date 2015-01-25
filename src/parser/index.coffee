@@ -2,7 +2,7 @@ moment = require 'moment'
 _ = require 'underscore'
 
 require './string'
-workout = require '../workout'
+Workout = require '../workout'
 handlers = require './handlers'
 
 #NUM_INTERVALS X DISTANCE TYPE @ TIME
@@ -21,7 +21,7 @@ parseLine = (lines, work) ->
 processTokens = (tokens, work) ->
   numStartTokens = tokens.length
   currentSet = work.current()
-  currentSet.addInterval()
+  currentSet.add()
 
   while tokens.length > 0
     token = tokens.shift()
@@ -34,7 +34,7 @@ processTokens = (tokens, work) ->
 parser = (stringToParse) ->
   throw new Error('You must provide a valid string to parse to continue.') unless stringToParse?
   lines = stringToParse.split('\n')
-  workToMake = new workout()
+  workToMake = new Workout()
   parseLine lines, workToMake
   workToMake
 

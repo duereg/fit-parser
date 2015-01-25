@@ -10,6 +10,6 @@ module.exports =
     toJSON: -> {@reps, @weight}
     toString: ->
       if @weight
-        "#{@weight} lbs x #{@reps} reps"
+        "- #{@weight} lbs x #{@reps} reps"
       else
-        "#{@reps} reps"
+        "- #{@reps} reps"

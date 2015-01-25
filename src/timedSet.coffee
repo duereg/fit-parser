@@ -15,7 +15,7 @@ class TimedSet extends Set
       else
         new Interval(interval)
 
-  addInterval: (intervalToAdd) ->
+  add: (intervalToAdd) ->
     throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval()  unless intervalToAdd?
     @intervals.push intervalToAdd
@@ -26,7 +26,7 @@ class TimedSet extends Set
     #remove single interval
     @intervals.pop()
     #replace with interval set
-    @addInterval new IntervalSet(numIntervals)
+    @add new IntervalSet(numIntervals)
 
   setRest: (rest) ->
     @current().rest = rest

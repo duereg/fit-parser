@@ -1,21 +1,21 @@
 duration = require('moment').duration
 
-TimedSet = require "../lib/timedSet"
-Interval = require "../lib/interval"
-{expect, intervals, jsonIntervals, oneMinuteThirty} = require "./spec-helper"
+TimedSet = require '../lib/timedSet'
+Interval = require '../lib/interval'
+{expect, intervals, jsonIntervals, oneMinuteThirty} = require './spec-helper'
 
-describe "TimedSet", ->
+describe 'TimedSet', ->
   {timedSet} = {}
 
   describe 'unnamed timedSet', ->
     beforeEach ->
       timedSet = new TimedSet()
 
-    describe "::toString", ->
+    describe '::toString', ->
       it 'outputs nothing without content', ->
         expect(timedSet.toString()).to.eq ''
 
-  describe "named timedSet with intervals", ->
+  describe 'named timedSet with intervals', ->
     beforeEach ->
       timedSet = new TimedSet {name: 'timedSet 2', intervals: jsonIntervals}
 
@@ -23,11 +23,11 @@ describe "TimedSet", ->
       expect(timedSet.intervals).to.eql intervals
 
     it 'timedSets the name', ->
-      expect(timedSet.name).to.eq "timedSet 2"
+      expect(timedSet.name).to.eq 'timedSet 2'
 
-    describe "::toString", ->
+    describe '::toString', ->
       it 'displays correct notation for all intervals', ->
-        expect(timedSet.toString()).to.eq "timedSet 2\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30"
+        expect(timedSet.toString()).to.eq 'timedSet 2\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30'
 
     describe '::toJSON', ->
       it 'outputs JSON matching original input', ->
@@ -35,7 +35,7 @@ describe "TimedSet", ->
           name: 'timedSet 2'
           intervals: jsonIntervals
 
-  describe "named timedSet with intervals", ->
+  describe 'named timedSet with intervals', ->
     beforeEach ->
       timedSet = new TimedSet {name: 'timedSet 2', intervals: [intervals: jsonIntervals]}
 
@@ -43,11 +43,11 @@ describe "TimedSet", ->
       expect(timedSet.intervals.length).to.eq 1
 
     it 'sets the name', ->
-      expect(timedSet.name).to.eq "timedSet 2"
+      expect(timedSet.name).to.eq 'timedSet 2'
 
-    describe "::toString", ->
+    describe '::toString', ->
       it 'displays correct notation for all intervals', ->
-        expect(timedSet.toString()).to.eq "timedSet 2\n3x100 huho @ 1:30"
+        expect(timedSet.toString()).to.eq 'timedSet 2\n3x100 huho @ 1:30'
 
     describe '::toJSON', ->
       it 'outputs JSON matching original input', ->
@@ -56,17 +56,17 @@ describe "TimedSet", ->
           intervals: [intervals: jsonIntervals]
         }
 
-  describe "named timedSet", ->
+  describe 'named timedSet', ->
     beforeEach ->
-      timedSet = new TimedSet({name: "timedSet 1"})
+      timedSet = new TimedSet({name: 'timedSet 1'})
 
-    it "creates an array of empty intervals", ->
+    it 'creates an array of empty intervals', ->
       expect(timedSet.intervals).to.eql []
 
-    it "timedSets the name", ->
-      expect(timedSet.name).to.eq "timedSet 1"
+    it 'timedSets the name', ->
+      expect(timedSet.name).to.eq 'timedSet 1'
 
-    describe "::current", ->
+    describe '::current', ->
       {interval} = {}
 
       beforeEach ->
@@ -85,22 +85,22 @@ describe "TimedSet", ->
         it 'parses time correctly and timedSets a duration', ->
           expect(timedSet.current().time).to.eql duration oneMinuteThirty
 
-    describe "::addInterval", ->
-      it "calling with null throws", ->
-        expect(() -> timedSet.addInterval(null)).to.throw "Invalid interval given"
+    describe '::add', ->
+      it 'calling with null throws', ->
+        expect(() -> timedSet.add(null)).to.throw 'Invalid interval given'
 
-      it "calling with no params creates an empty interval", ->
-        expect(timedSet.addInterval()).to.be.ok
+      it 'calling with no params creates an empty interval', ->
+        expect(timedSet.add()).to.be.ok
 
-    describe "::changeToMulti", ->
+    describe '::changeToMulti', ->
       beforeEach ->
         timedSet.current().distance = 2
         timedSet.changeToMulti()
 
-      it "removes the previous interval", ->
+      it 'removes the previous interval', ->
         expect(timedSet.current().distance).not.to.eq 2
 
-      it "creates an timedSet to replace the previous interval", ->
+      it 'creates an timedSet to replace the previous interval', ->
         expect(timedSet.current().intervals.length).to.eq 2
 
       describe '::toJSON', ->
@@ -116,14 +116,14 @@ describe "TimedSet", ->
             ]
           }
 
-    describe "with added intervals", ->
+    describe 'with added intervals', ->
       beforeEach ->
         intervals.forEach (interval) ->
-          timedSet.addInterval interval
+          timedSet.add interval
 
-      describe "::toString", ->
+      describe '::toString', ->
         it 'displays correct notation for all intervals', ->
-          expect(timedSet.toString()).to.eq "timedSet 1\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30"
+          expect(timedSet.toString()).to.eq 'timedSet 1\n100 huho @ 1:30\n100 huho @ 1:30\n100 huho @ 1:30'
 
       describe '::toJSON', ->
         it 'outputs correct information', ->

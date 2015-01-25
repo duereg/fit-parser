@@ -64,7 +64,7 @@ describe 'Workout', ->
 
     describe "adding an interval set", ->
       beforeEach ->
-        workout.current().addInterval()
+        workout.current().add()
         workout.current().setDistance(4)
         workout.current().changeToMulti()
         workout.current().setDistance(75)

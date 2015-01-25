@@ -2,10 +2,11 @@ moment = require 'moment'
 _ = require 'underscore'
 
 Interval = require './interval'
+Set = require './set'
 propertyFactory = require './propertyFactory'
 int = require './parser/handlers/int'
 
-class IntervalSet
+class IntervalSet extends Set
   constructor: (intervals) ->
     @intervals = []
 
@@ -28,16 +29,7 @@ class IntervalSet
   isEmpty: ->
     @intervals.length is 0
 
-  current: ->
-    currentInterval = null
-    intervalLength = @intervals.length
-    if intervalLength > 0
-      currentInterval = @intervals[intervalLength - 1]
-    else
-      currentInterval = @addInterval()
-    currentInterval
-
-  addInterval: (intervalToAdd) ->
+  add: (intervalToAdd) ->
     throw new Error('Invalid interval given')  if intervalToAdd is null
     intervalToAdd = new Interval() unless intervalToAdd?
     @intervals.push intervalToAdd

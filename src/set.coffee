@@ -15,13 +15,16 @@ class Set
   toJSON: ->
     {@name, intervals: @intervals.map (interval) -> interval.toJSON()}
 
+  add: ->
+    throw new Error("Must implement")
+
   current: ->
     currentInterval = null
     intervalLength = @intervals.length
     if intervalLength > 0
       currentInterval = @intervals[intervalLength - 1]
     else
-      currentInterval = @addInterval()
+      currentInterval = @add()
     currentInterval
 
   totalIntervals: ->

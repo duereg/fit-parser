@@ -71,17 +71,17 @@ describe "IntervalSet", ->
       it 'creates a valid interval', ->
         expect(interval).to.be.ok
 
-    describe "::addInterval", ->
+    describe "::add", ->
       it "calling with null throws", ->
-        expect(() -> set.addInterval(null)).to.throw "Invalid interval given"
+        expect(() -> set.add(null)).to.throw "Invalid interval given"
 
       it "calling with no params creates an empty interval", ->
-        expect(set.addInterval()).to.be.ok
+        expect(set.add()).to.be.ok
 
     describe "with multiple intervals", ->
       beforeEach ->
         intervals.forEach (interval) ->
-          set.addInterval interval
+          set.add interval
 
       describe "::toString", ->
         it 'displays correct set notation for all intervals', ->

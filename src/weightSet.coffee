@@ -8,9 +8,9 @@ class WeightSet extends Set
     _super.call(this, options)
     @intervals = @intervals.map (interval) -> new Weight(interval)
 
-  addWeight: (weightToAdd) ->
+  add: (weightToAdd) ->
     throw new Error('Invalid weight given')  if weightToAdd is null
-    weightToAdd = new Weight() unless weightToAdd?
+    weightToAdd = new Weight(weightToAdd)
     @intervals.push weightToAdd
     weightToAdd
 
@@ -26,4 +26,4 @@ class WeightSet extends Set
   totalWeight: ->
     actions.sum @intervals, 'weight'
 
-module.exports = TimedSet
+module.exports = WeightSet
