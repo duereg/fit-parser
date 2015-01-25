@@ -11,10 +11,10 @@ parseLine = (lines, work) ->
   while lines.length > 0
     line = lines.shift().trim()
     tokens = line.split(/[ \t]/)
-    notAllEmpty = not _.all(tokens, (item) ->
-      item.isEmpty()
-    )
-    processTokens tokens, work  if notAllEmpty
+
+    notAllEmpty = not _.all tokens, (item) -> item.isEmpty()
+
+    processTokens tokens, work if notAllEmpty
   return
 
 #TODO: Break into chain of responsibility
