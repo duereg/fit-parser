@@ -1,19 +1,19 @@
 #!/usr/bin/env coffee
 
-parser = require "../src/parser"
+parser = require '../src/parser'
 
 if process.argv.length < 3
-  console.log ""
-  console.log "  Usage: #{process.argv[1]} 'workout sets go here'"
-  console.log ""
-  console.log "  Where workouts are in any of the following formats: "
-  console.log ""
-  console.log "     4x100 HUHO @ 1:30"
-  console.log "     1000 Kick @ 12:00"
-  console.log "     2:00 Rest"
-  console.log "     20:00 Swim"
-else
+  console.log """
+  Usage: #{process.argv[1]} 'workout sets go here'
 
+  Where workouts are in any of the following formats:
+
+     4x100 HUHO @ 1:30
+     1000 Kick @ 12:00
+     2:00 Rest
+     20:00 Swim
+"""
+else
   stuff = process.argv.slice(2)
   console.log JSON.stringify parser stuff.join ' '
 

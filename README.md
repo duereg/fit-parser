@@ -10,6 +10,38 @@
 
 ## Usage Example
 
+Given a set of swim workouts either in UWH Swim format:
+
+```
+4x100 HUHO @ 1:30
+1000 Kick @ 12:00
+2:00 Rest
+20:00 Swim
+```
+
+or [FitNotes](https://play.google.com/store/apps/details?id=com.github.jamesgay.fitnotes&hl=en) format:
+
+```
+** Flat Barbell Bench Press **
+- 95.0 lbs x 10 reps
+- 135.0 lbs x 10 reps
+- 135.0 lbs x 10 reps
+- 145.0 lbs x 10 reps
+- 155.0 lbs x 6 reps
+- 155.0 lbs x 5 reps
+
+** Decline cable flies **
+- 30.0 lbs x 10 reps
+- 35.0 lbs x 10 reps
+- 40.0 lbs x 10 reps
+
+** Rope Beaters **
+- 00:30
+- 00:30
+```
+
+parses the text and returns a sets of formatted objects which you can use to further analyze the data.
+
 ## Testing
 
     npm test
