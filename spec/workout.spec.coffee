@@ -35,7 +35,6 @@ describe 'Workout', ->
 
     it 'contains the correct number of sets', ->
       expect(workout.sets.length).to.eq 6
-      console.log JSON.stringify workout.toJSON()
 
     it "the sets are named correctly", ->
       expect(workout.sets[0].name).to.eq '** Flat Barbell Bench Press **'
