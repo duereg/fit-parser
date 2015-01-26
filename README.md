@@ -1,16 +1,16 @@
-# swim-parser
+# fit-parser
 
-[![Dependency status](https://david-dm.org/duereg/swim-parser.svg)](https://david-dm.org/duereg/swim-parser)
-[![devDependency Status](https://david-dm.org/duereg/swim-parser/dev-status.svg)](https://david-dm.org/duereg/swim-parser#info=devDependencies)
-[![Build Status](https://secure.travis-ci.org/duereg/swim-parser.svg?branch=master)](https://travis-ci.org/duereg/swim-parser)
+[![Dependency status](https://david-dm.org/duereg/fit-parser.svg)](https://david-dm.org/duereg/fit-parser)
+[![devDependency Status](https://david-dm.org/duereg/fit-parser/dev-status.svg)](https://david-dm.org/duereg/fit-parser#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/duereg/fit-parser.svg?branch=master)](https://travis-ci.org/duereg/fit-parser)
 
 ## Installation
 
-    npm install swim-parser
+    npm install fit-parser
 
 ## Usage Example
 
-Given a set of swim workouts either in UWH Swim format:
+Given a set of workouts either in UWH Swim format:
 
 ```
 4x100 HUHO @ 1:30
@@ -50,7 +50,7 @@ parses the text and returns a sets of formatted objects which you can use to fur
 
 The MIT License (MIT)
 
-Copyright 2014 Matt
+Copyright 2014 Matt Blair
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -1,7 +1,7 @@
 {
-  "name": "swim-parser",
+  "name": "fit-parser",
   "version": "0.8.1",
-  "description": "Parse a swim set into a set of workout objects",
+  "description": "Parse a written workout into a set of workout objects",
   "keywords": [
     "fitness",
     "swimming",
@@ -9,8 +9,8 @@
     "sets",
     "parser"
   ],
-  "homepage": "https://github.com/duereg/swim-parser",
-  "bugs": "https://github.com/duereg/swim-parser/issues",
+  "homepage": "https://github.com/duereg/fit-parser",
+  "bugs": "https://github.com/duereg/fit-parser/issues",
   "author": {
     "name": "Matt",
     "email": "",
@@ -19,7 +19,7 @@
   "main": "./lib/parser/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/duereg/swim-parser.git"
+    "url": "https://github.com/duereg/fit-parser.git"
   },
   "scripts": {
     "test": "gulp test",
