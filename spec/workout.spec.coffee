@@ -6,7 +6,7 @@ Workout = require '../lib/workout'
 timeFormatter = require '../lib/timeFormatter'
 
 longSwim = {
-  distance : 1000,
+  distance: 1000,
   type: 'swim'
   rest: timeFormatter.noTime
   time: _({minutes: 20}).defaults(timeFormatter.noTime)
@@ -36,7 +36,7 @@ describe 'Workout', ->
     it 'contains the correct number of sets', ->
       expect(workout.sets.length).to.eq 6
 
-    it "the sets are named correctly", ->
+    it 'the sets are named correctly', ->
       expect(workout.sets[0].name).to.eq '** Flat Barbell Bench Press **'
       expect(workout.sets[1].name).to.eq '** Decline cable flies **'
       expect(workout.sets[2].name).to.eq '** Dead Bug 3 **'

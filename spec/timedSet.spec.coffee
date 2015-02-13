@@ -20,7 +20,7 @@ describe 'TimedSet', ->
       timedSet = new TimedSet {name: 'timedSet 2', intervals: jsonIntervals}
 
     it 'creates hydrated intervals from given JSON', ->
-      expect(timedSet.intervals).to.eql intervals
+      expect(JSON.stringify timedSet.intervals).to.eq JSON.stringify intervals
 
     it 'timedSets the name', ->
       expect(timedSet.name).to.eq 'timedSet 2'
@@ -87,7 +87,7 @@ describe 'TimedSet', ->
 
     describe '::add', ->
       it 'calling with null throws', ->
-        expect(() -> timedSet.add(null)).to.throw 'Invalid interval given'
+        expect( -> timedSet.add(null)).to.throw 'Invalid interval given'
 
       it 'calling with no params creates an empty interval', ->
         expect(timedSet.add()).to.be.ok

@@ -1,20 +1,20 @@
 moment = require 'moment'
 _ = require 'underscore'
 
-IntervalSet = require "../lib/intervalSet"
-{expect, intervals, jsonIntervals} = require "./spec-helper"
+IntervalSet = require '../lib/intervalSet'
+{expect, intervals, jsonIntervals} = require './spec-helper'
 
-describe "IntervalSet", ->
+describe 'IntervalSet', ->
   {set} = {}
 
-  describe "Given a number of intervals", ->
+  describe 'Given a number of intervals', ->
     beforeEach ->
       set = new IntervalSet(4)
 
-    it "creates a populated array", ->
+    it 'creates a populated array', ->
       expect(set.intervals.length).to.eq(4)
 
-    it "::isEmpty returns false", ->
+    it '::isEmpty returns false', ->
       expect(set.isEmpty()).to.be.false
 
     describe 'setting distance', ->
@@ -25,16 +25,16 @@ describe "IntervalSet", ->
         expect(_(set.intervals).all((interval) -> interval.distance is 100)).to.be.true
 
 
-  describe "given intervals", ->
+  describe 'given intervals', ->
     beforeEach ->
       set = new IntervalSet jsonIntervals
 
     it 'creates hydrated intervals from given JSON', ->
-      expect(set.intervals).to.eql intervals
+      expect(JSON.stringify set.intervals).to.eq JSON.stringify intervals
 
-    describe "::toString", ->
+    describe '::toString', ->
       it 'displays correct notation for all intervals', ->
-        expect(set.toString()).to.eq "3x100 huho @ 1:30"
+        expect(set.toString()).to.eq '3x100 huho @ 1:30'
 
     describe '::toJSON', ->
       it 'outputs JSON matching original input', ->
@@ -46,20 +46,20 @@ describe "IntervalSet", ->
       it 'returns summed milliseconds from the intervals', ->
         expect(set.time).to.eq 270000
 
-  describe "Creating an empty set", ->
+  describe 'Creating an empty set', ->
     beforeEach ->
       set = new IntervalSet()
 
-    it "creates an array of empty intervals", ->
+    it 'creates an array of empty intervals', ->
       expect(set.intervals).to.eql []
 
-    it "outputs an empty string", ->
-      expect(set.toString()).to.eq ""
+    it 'outputs an empty string', ->
+      expect(set.toString()).to.eq ''
 
-    it "::isEmpty returns true", ->
+    it '::isEmpty returns true', ->
       expect(set.isEmpty()).to.be.true
 
-    describe "::current", ->
+    describe '::current', ->
       {interval} = {}
 
       beforeEach ->
@@ -71,23 +71,23 @@ describe "IntervalSet", ->
       it 'creates a valid interval', ->
         expect(interval).to.be.ok
 
-    describe "::add", ->
-      it "calling with null throws", ->
-        expect(() -> set.add(null)).to.throw "Invalid interval given"
+    describe '::add', ->
+      it 'calling with null throws', ->
+        expect( -> set.add(null)).to.throw 'Invalid interval given'
 
-      it "calling with no params creates an empty interval", ->
+      it 'calling with no params creates an empty interval', ->
         expect(set.add()).to.be.ok
 
-    describe "with multiple intervals", ->
+    describe 'with multiple intervals', ->
       beforeEach ->
         intervals.forEach (interval) ->
           set.add interval
 
-      describe "::toString", ->
+      describe '::toString', ->
         it 'displays correct set notation for all intervals', ->
-          expect(set.toString()).to.eq "3x100 huho @ 1:30"
+          expect(set.toString()).to.eq '3x100 huho @ 1:30'
 
-      describe "distance", ->
+      describe 'distance', ->
         it 'sums the distances correctly', ->
           expect(set.distance).to.eq 300
 
@@ -97,7 +97,7 @@ describe "IntervalSet", ->
             intervals: jsonIntervals
           }
 
-      describe "time", ->
+      describe 'time', ->
         {time} = {}
 
         beforeEach ->

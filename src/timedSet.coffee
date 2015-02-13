@@ -7,7 +7,7 @@ timeFormatter = require('./timeFormatter')
 class TimedSet extends Set
   constructor: (options) ->
     #this isn't the right way to do this
-    _super.call(this, options)
+    super(options)
 
     @intervals = @intervals.map (interval) ->
       if interval.intervals
