@@ -27,6 +27,10 @@ describe 'Weight', ->
     it 'with time not set, formats correctly', ->
       expect(tenReps.toString()).to.eq '- 135 lbs x 10 reps'
 
+    describe '::oneRepMax', ->
+      it 'outputs the correct value', ->
+        expect(Math.round(tenReps.oneRepMax())).to.eq 180
+
     describe '::toJSON', ->
       {json} = {}
 

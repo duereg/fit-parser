@@ -5,8 +5,8 @@ Weight = require '../lib/weight'
 {expect} = require './spec-helper'
 
 jsonWeights = [
-  { weight: 135, reps: 10 }
-  { weight: 135, reps: 10 }
+  { weight: 155, reps: 10 }
+  { weight: 145, reps: 10 }
   { weight: 135, reps: 10 }
 ]
 
@@ -35,13 +35,17 @@ describe 'WeightSet', ->
 
     describe '::toString', ->
       it 'displays correct notation for all intervals', ->
-        expect(weightSet.toString()).to.eq 'weightSet 2\n- 135 lbs x 10 reps\n- 135 lbs x 10 reps\n- 135 lbs x 10 reps'
+        expect(weightSet.toString()).to.eq 'weightSet 2\n- 155 lbs x 10 reps\n- 145 lbs x 10 reps\n- 135 lbs x 10 reps'
 
     describe '::toJSON', ->
       it 'outputs JSON matching original input', ->
         expect(weightSet.toJSON()).to.eql
           name: 'weightSet 2'
           intervals: jsonWeights
+
+    describe '::oneRepMax', ->
+      it 'takes the maximum value from the intervals', ->
+        expect(Math.round(weightSet.oneRepMax())).to.eq(207)
 
   describe 'named weightSet', ->
     beforeEach ->
@@ -86,7 +90,7 @@ describe 'WeightSet', ->
 
       describe '::toString', ->
         it 'displays correct notation for all intervals', ->
-          expect(weightSet.toString()).to.eq 'weightSet 1\n- 135 lbs x 10 reps\n- 135 lbs x 10 reps\n- 135 lbs x 10 reps'
+          expect(weightSet.toString()).to.eq 'weightSet 1\n- 155 lbs x 10 reps\n- 145 lbs x 10 reps\n- 135 lbs x 10 reps'
 
       describe '::toJSON', ->
         it 'outputs correct information', ->

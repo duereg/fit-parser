@@ -31,4 +31,13 @@ class WeightSet extends Set
   totalWeight: ->
     actions.sum @intervals, 'weight'
 
+  oneRepMax: ->
+    @intervals.reduce (prev, next) ->
+      max = if prev?.oneRepMax? then prev?.oneRepMax() else prev
+      nextMax = next?.oneRepMax()
+
+      if nextMax > max then nextMax else max
+
+
+
 module.exports = WeightSet
