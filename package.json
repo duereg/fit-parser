@@ -1,6 +1,6 @@
 {
   "name": "fit-parser",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Parse a written workout into a set of workout objects",
   "keywords": [
     "fitness",
