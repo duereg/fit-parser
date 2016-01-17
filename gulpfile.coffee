@@ -2,9 +2,9 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 
-clean = require('gulp-clean')
+clean = require 'gulp-clean'
 coffee = require 'gulp-coffee'
-coffeelint = require('gulp-coffeelint')
+coffeelint = require 'gulp-coffeelint'
 istanbul = require 'gulp-istanbul'
 mocha = require 'gulp-mocha'
 
@@ -24,9 +24,10 @@ gulp.task 'lint', ->
 gulp.task 'test', ['coffee', 'lint'], ->
   gulp.src ['lib/**/*.js']
     .pipe istanbul({includeUntested: true}) # Covering files
+    .pipe istanbul.hookRequire()
     .on 'finish', ->
       gulp.src ['spec/**/*.spec.coffee']
-        .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script/register'
+        .pipe mocha reporter: 'spec', compilers: 'coffee:coffee-script'
         .pipe istanbul.writeReports() # Creating the reports after tests run
 
 gulp.task 'default', ['clean', 'coffee']
