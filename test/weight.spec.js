@@ -1,10 +1,5 @@
-var Weight, _, expect;
-
-({expect} = require('./spec-helper'));
-
-Weight = require('../lib/weight');
-
-_ = require('underscore');
+const {expect} = require('./spec-helper');
+const Weight = require('../lib/weight');
 
 describe('Weight', function() {
   var tenReps;

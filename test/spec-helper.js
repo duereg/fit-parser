@@ -1,25 +1,18 @@
-var Interval, _, chai, intervals, jsonIntervals, moment, oneMinuteThirty, sinon, timeFormatter, weightWorkout;
-
-chai = require('chai');
-
-sinon = require('sinon');
-
+const chai = require('chai');
+const sinon = require('sinon');
 chai.use(require('sinon-chai'));
+const moment = require('moment');
+const _ = require('lodash');
 
-moment = require('moment');
+const timeFormatter = require('../lib/timeFormatter');
+const Interval = require("../lib/interval");
 
-_ = require('underscore');
-
-timeFormatter = require('../lib/timeFormatter');
-
-Interval = require("../lib/interval");
-
-oneMinuteThirty = _({
+const oneMinuteThirty = _.defaults({
   minutes: 1,
   seconds: 30
-}).defaults(timeFormatter.noTime);
+}, timeFormatter.noTime);
 
-jsonIntervals = [
+const jsonIntervals = [
   {
     distance: 100,
     type: 'huho',
@@ -40,7 +33,7 @@ jsonIntervals = [
   }
 ];
 
-intervals = [
+const intervals = [
   new Interval({
     distance: 100,
     type: 'huho',
@@ -58,7 +51,7 @@ intervals = [
   })
 ];
 
-weightWorkout = {
+const weightWorkout = {
   "sets": [
     {
       "name": "** Flat Barbell Bench Press **",

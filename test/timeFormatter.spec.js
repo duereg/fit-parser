@@ -1,12 +1,7 @@
-var _, expect, moment, timeFormatter;
-
-({expect} = require('./spec-helper'));
-
-timeFormatter = require('../lib/timeFormatter');
-
-moment = require('moment');
-
-_ = require('underscore');
+const {expect} = require('./spec-helper');
+const timeFormatter = require('../lib/timeFormatter');
+const moment = require('moment');
+const _ = require('lodash');
 
 describe('timeFormatter', function() {
   var duration, noTime;
@@ -92,9 +87,9 @@ describe('timeFormatter', function() {
         });
       });
       return it('returns a valid representation', function() {
-        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(_({
+        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(_.defaults({
           minutes: 5
-        }).defaults(timeFormatter.noTime));
+        }, timeFormatter.noTime));
       });
     });
     describe('given crap', function() {
@@ -102,7 +97,7 @@ describe('timeFormatter', function() {
         return fiveMinutes = 'abc';
       });
       return it('returns the empty time representation', function() {
-        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(_(timeFormatter.noTime).clone());
+        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(timeFormatter.noTime);
       });
     });
     return describe('given null', function() {
@@ -110,7 +105,7 @@ describe('timeFormatter', function() {
         return fiveMinutes = null;
       });
       return it('returns the empty time representation', function() {
-        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(_(timeFormatter.noTime).clone());
+        return expect(timeFormatter.toJSON(fiveMinutes)).to.eql(timeFormatter.noTime);
       });
     });
   });

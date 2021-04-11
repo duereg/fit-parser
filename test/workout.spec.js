@@ -1,31 +1,25 @@
-var Workout, _, expect, jsonIntervals, longSwim, moment, shortOuo, timeFormatter, weightWorkout;
+const {expect, jsonIntervals, weightWorkout} = require('./spec-helper');
+const moment = require('moment');
+const _ = require('lodash');
+const Workout = require('../lib/workout');
+const timeFormatter = require('../lib/timeFormatter');
 
-({expect, jsonIntervals, weightWorkout} = require('./spec-helper'));
-
-moment = require('moment');
-
-_ = require('underscore');
-
-Workout = require('../lib/workout');
-
-timeFormatter = require('../lib/timeFormatter');
-
-longSwim = {
+const longSwim = {
   distance: 1000,
   type: 'swim',
   rest: timeFormatter.noTime,
-  time: _({
+  time: _.defaults({
     minutes: 20
-  }).defaults(timeFormatter.noTime)
+  }, timeFormatter.noTime)
 };
 
-shortOuo = {
+const shortOuo = {
   distance: 75,
   rest: timeFormatter.noTime,
-  time: _({
+  time: _.defaults({
     minutes: 1,
     seconds: 10
-  }).defaults(timeFormatter.noTime),
+  }, timeFormatter.noTime),
   type: 'ouou'
 };
 
