@@ -50,7 +50,7 @@ parses the text and returns a sets of formatted objects which you can use to fur
 
 The MIT License (MIT)
 
-Copyright 2015 Matt Blair
+Copyright 2021 Matt Blair
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
