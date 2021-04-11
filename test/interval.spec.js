@@ -2,7 +2,7 @@ const {expect} = require('./spec-helper');
 const Interval = require('../lib/interval');
 const timeFormatter = require('../lib/timeFormatter');
 const moment = require('moment');
-const _ = require('underscore');
+const _ = require('lodash');
 
 describe('interval', function() {
   var int;
@@ -74,9 +74,7 @@ describe('interval', function() {
           });
           it('outputs correctly', function() {
             return expect(json).to.eql({
-              time: _({
-                seconds: 30
-              }).defaults(timeFormatter.noTime),
+              time: _.defaults({seconds: 30}, timeFormatter.noTime),
               rest: timeFormatter.noTime,
               distance: 100,
               type: 'huho'

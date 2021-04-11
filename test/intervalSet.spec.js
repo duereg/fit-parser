@@ -1,12 +1,7 @@
-var IntervalSet, _, expect, intervals, jsonIntervals, moment;
-
-moment = require('moment');
-
-_ = require('underscore');
-
-IntervalSet = require('../lib/intervalSet');
-
-({expect, intervals, jsonIntervals} = require('./spec-helper'));
+const moment = require('moment');
+const _ = require('lodash');
+const IntervalSet = require('../lib/intervalSet');
+const {expect, intervals, jsonIntervals} = require('./spec-helper');
 
 describe('IntervalSet', function() {
   var set;
@@ -26,7 +21,7 @@ describe('IntervalSet', function() {
         return set.distance = 100;
       });
       return it('sets the distance on the underlying intervals', function() {
-        return expect(_(set.intervals).all(function(interval) {
+        return expect(_.every(set.intervals, (interval) => {
           return interval.distance === 100;
         })).to.be.true;
       });
