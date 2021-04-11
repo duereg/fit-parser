@@ -1,27 +1,62 @@
-require 'coffee-errors'
+var Interval, _, chai, intervals, jsonIntervals, moment, oneMinuteThirty, sinon, timeFormatter, weightWorkout;
 
-chai = require 'chai'
-sinon = require 'sinon'
-chai.use require 'sinon-chai'
-moment = require 'moment'
-_ = require 'underscore'
+chai = require('chai');
 
-timeFormatter = require '../lib/timeFormatter'
-Interval = require "../lib/interval"
+sinon = require('sinon');
 
-oneMinuteThirty = _({minutes: 1, seconds: 30}).defaults(timeFormatter.noTime)
+chai.use(require('sinon-chai'));
+
+moment = require('moment');
+
+_ = require('underscore');
+
+timeFormatter = require('../lib/timeFormatter');
+
+Interval = require("../lib/interval");
+
+oneMinuteThirty = _({
+  minutes: 1,
+  seconds: 30
+}).defaults(timeFormatter.noTime);
 
 jsonIntervals = [
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-  {distance: 100, type: 'huho', time: oneMinuteThirty, rest: timeFormatter.noTime}
-]
+  {
+    distance: 100,
+    type: 'huho',
+    time: oneMinuteThirty,
+    rest: timeFormatter.noTime
+  },
+  {
+    distance: 100,
+    type: 'huho',
+    time: oneMinuteThirty,
+    rest: timeFormatter.noTime
+  },
+  {
+    distance: 100,
+    type: 'huho',
+    time: oneMinuteThirty,
+    rest: timeFormatter.noTime
+  }
+];
 
 intervals = [
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-  new Interval {distance: 100, type: 'huho', time: moment.duration(oneMinuteThirty)}
-]
+  new Interval({
+    distance: 100,
+    type: 'huho',
+    time: moment.duration(oneMinuteThirty)
+  }),
+  new Interval({
+    distance: 100,
+    type: 'huho',
+    time: moment.duration(oneMinuteThirty)
+  }),
+  new Interval({
+    distance: 100,
+    type: 'huho',
+    time: moment.duration(oneMinuteThirty)
+  })
+];
 
 weightWorkout = {
   "sets": [
@@ -174,6 +209,14 @@ weightWorkout = {
       ]
     }
   ]
-}
+};
 
-module.exports = {expect: chai.expect, sinon, chai, jsonIntervals, intervals, oneMinuteThirty, weightWorkout}
+module.exports = {
+  expect: chai.expect,
+  sinon,
+  chai,
+  jsonIntervals,
+  intervals,
+  oneMinuteThirty,
+  weightWorkout
+};
