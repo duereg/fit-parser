@@ -1,9 +1,9 @@
-#!/usr/bin/env coffee
+#!/usr/bin/env node
 
-parser = require '../src/parser'
+const parser = require('../src/parser');
 
-if process.argv.length < 3
-  console.log """
+if (process.argv.length < 3){
+  console.log(```
   Usage: #{process.argv[1]} 'workout sets go here'
 
   Where workouts are in any of the following formats:
@@ -12,9 +12,8 @@ if process.argv.length < 3
      1000 Kick @ 12:00
      2:00 Rest
      20:00 Swim
-"""
-else
-  stuff = process.argv.slice(2)
-  console.log JSON.stringify parser stuff.join ' '
-
-
+```);
+} else {
+  stuff = process.argv.slice(2);
+  console.log(JSON.stringify(parser(stuff.join(' '))));
+}

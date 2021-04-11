@@ -1,14 +1,8 @@
-var Interval, _, expect, moment, timeFormatter;
-
-({expect} = require('./spec-helper'));
-
-Interval = require('../lib/interval');
-
-timeFormatter = require('../lib/timeFormatter');
-
-moment = require('moment');
-
-_ = require('underscore');
+const {expect} = require('./spec-helper');
+const Interval = require('../lib/interval');
+const timeFormatter = require('../lib/timeFormatter');
+const moment = require('moment');
+const _ = require('underscore');
 
 describe('interval', function() {
   var int;
